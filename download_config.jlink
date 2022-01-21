@@ -1,0 +1,5 @@
+log ./log/dmatx.log
+erase
+loadfile ./build/chaser_imu.hex 0x08000000
+r
+qc

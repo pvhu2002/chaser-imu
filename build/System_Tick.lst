@@ -1,0 +1,78 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccQOmbsv.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"System_Tick.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Sys_Delay,"ax",%progbits
+  18              		.align	1
+  19              		.global	Sys_Delay
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	Sys_Delay:
+  25              	.LVL0:
+  26              	.LFB40:
+  27              		.file 1 "Modules/System/System_Tick.c"
+   1:Modules/System/System_Tick.c **** #include "System_Tick.h"
+   2:Modules/System/System_Tick.c **** 
+   3:Modules/System/System_Tick.c **** /**
+   4:Modules/System/System_Tick.c ****   * @brief This function provides accurate delay (in milliseconds) based 
+   5:Modules/System/System_Tick.c ****   *        on variable incremented.
+   6:Modules/System/System_Tick.c ****   * @param delay specifies the delay time length, in milliseconds.
+   7:Modules/System/System_Tick.c ****   * @retval None
+   8:Modules/System/System_Tick.c ****   */
+   9:Modules/System/System_Tick.c **** void Sys_Delay(uint16_t delay) {
+  28              		.loc 1 9 32 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  10:Modules/System/System_Tick.c **** 	HAL_Delay(delay);
+  32              		.loc 1 10 2 view .LVU1
+   9:Modules/System/System_Tick.c **** 	HAL_Delay(delay);
+  33              		.loc 1 9 32 is_stmt 0 view .LVU2
+  34 0000 10B5     		push	{r4, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 14, -4
+  39              		.loc 1 10 2 view .LVU3
+  40 0002 FFF7FEFF 		bl	HAL_Delay
+  41              	.LVL1:
+  11:Modules/System/System_Tick.c **** }...
+  42              		.loc 1 11 1 view .LVU4
+  43              		@ sp needed
+  44 0006 10BD     		pop	{r4, pc}
+  45              		.cfi_endproc
+  46              	.LFE40:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccQOmbsv.s 			page 2
+
+
+  48              		.text
+  49              	.Letext0:
+  50              		.file 2 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+  51              		.file 3 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+  52              		.file 4 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccQOmbsv.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 System_Tick.c
+C:\Users\ADMINI~1\AppData\Local\Temp\ccQOmbsv.s:18     .text.Sys_Delay:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccQOmbsv.s:24     .text.Sys_Delay:00000000 Sys_Delay
+
+UNDEFINED SYMBOLS
+HAL_Delay

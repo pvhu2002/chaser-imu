@@ -1,0 +1,213 @@
+TD058 000:144.875   SEGGER J-Link V7.54d Log File
+TD058 000:145.008   DLL Compiled: Sep 28 2021 16:18:43
+TD058 000:145.043   Logging started @ 2022-01-21 07:41
+TD058 000:145.080 - 145.097ms
+TD058 000:145.150 JLINK_ExecCommand("device=STM32F030F4", ...). 
+TD058 000:153.752   XML file found at: C:\Program Files\SEGGER\JLink\JLinkDevices.xml
+TD058 000:154.491   C:\Program Files\SEGGER\JLink\JLinkDevices.xml evaluated successfully.
+TD058 000:241.041   Device "STM32F030F4" selected.
+TD058 000:245.460 - 100.277ms returns 0x00
+TD058 000:245.598 JLINK_EnableLog(...)
+TD058 000:245.646 - 0.064ms
+TD058 000:245.685 JLINK_GetEmuCaps()
+TD058 000:245.720 - 0.052ms returns 0xB9FF7BBF
+TD058 000:245.762 JLINK_TIF_GetAvailable(...)
+TD058 000:246.252 - 0.536ms
+TD058 000:246.325 JLINK_TIF_Select(JLINKARM_TIF_SWD)
+TD058 000:247.638 - 1.373ms returns 0x00
+TD058 000:247.746 JLINK_IsConnected()
+TD058 000:247.795 - 0.066ms returns FALSE
+TD058 000:247.843 JLINK_SetSpeed(1000)
+TD058 000:248.189 - 0.393ms
+TD058 000:248.264 JLINK_Connect()
+TD058 000:248.725   InitTarget() start
+TD058 000:248.799    J-Link Script File: Executing InitTarget()
+TD058 000:285.962   InitTarget() end
+TD058 000:287.190   Found SW-DP with ID 0x0BB11477
+TD058 000:294.555   Old FW that does not support reading DPIDR via DAP jobs
+TD058 000:301.987   DPv0 detected
+TD058 000:302.110   Scanning AP map to find all available APs
+TD058 000:307.259   AP[1]: Stopped AP scan as end of AP map has been reached
+TD058 000:307.350   AP[0]: AHB-AP (IDR: 0x04770021)
+TD058 000:307.402   Iterating through AP map to find AHB-AP to use
+TD058 000:315.905   AP[0]: Core found
+TD058 000:316.001   AP[0]: AHB-AP ROM base: 0xE00FF000
+TD058 000:320.161   CPUID register: 0x410CC200. Implementer code: 0x41 (ARM)
+TD058 000:320.245   Found Cortex-M0 r0p0, Little endian.
+TD058 000:421.770   -- Max. mem block: 0x00002408
+TD058 000:422.175   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+TD058 000:422.945   CPU_ReadMem(4 bytes @ 0xE0002000)
+TD058 000:423.723   FPUnit: 4 code (BP) slots and 0 literal slots
+TD058 000:423.786   CPU_ReadMem(4 bytes @ 0xE000EDFC)
+TD058 000:424.565   CPU_WriteMem(4 bytes @ 0xE000EDFC)
+TD058 000:425.370   CPU_ReadMem(4 bytes @ 0xE0001000)
+TD058 000:426.147   CPU_WriteMem(4 bytes @ 0xE0001000)
+TD058 000:426.982   CoreSight components:
+TD058 000:427.066   ROMTbl[0] @ E00FF000
+TD058 000:427.120   CPU_ReadMem(64 bytes @ 0xE00FF000)
+TD058 000:428.853   CPU_ReadMem(32 bytes @ 0xE000EFE0)
+TD058 000:430.113   [0][0]: E000E000 CID B105E00D PID 000BB008 SCS
+TD058 000:430.207   CPU_ReadMem(32 bytes @ 0xE0001FE0)
+TD058 000:431.457   [0][1]: E0001000 CID B105E00D PID 000BB00A DWT
+TD058 000:431.543   CPU_ReadMem(32 bytes @ 0xE0002FE0)
+TD058 000:432.779   [0][2]: E0002000 CID B105E00D PID 000BB00B FPB
+TD058 000:432.923 - 184.691ms returns 0x00
+TD058 000:433.046 JLINK_GetIdData(pIdData)
+TD058 000:433.965   pIdData->ScanLen=4
+TD058 000:434.042   
+TD058 000:434.076   pIdData->NumDevices=1
+TD058 000:434.126   
+TD058 000:434.160   pIdData->aId[0]=0x0BB11477
+TD058 000:434.211   
+TD058 000:434.245   pIdData->aIrRead[0]=0
+TD058 000:434.296   
+TD058 000:434.330   pIdData->aScanLen[0]=0
+TD058 000:434.381   
+TD058 000:434.415   pIdData->aScanRead[0]=0
+TD058 000:434.467   
+TD058 000:434.502 - 1.484ms
+TD058 000:434.583 JLINK_GetMemZones(...)
+TD058 000:434.624 - 0.058ms returns 0
+TD058 000:434.662 JLINK_HasError()
+TD058 000:434.701 JLINK_CORE_GetFound()
+TD058 000:434.736 - 0.052ms returns 0x60000FF
+TD058 000:434.786 JLINK_DEVICE_GetIndex(sDeviceName = <NULL>)
+TD058 000:434.823 - 0.054ms returns 6023
+TD058 000:434.859 JLINK_IsHalted()
+TD058 000:435.644 - 0.843ms returns FALSE
+TD058 000:435.732 JLINK_Halt()
+TD058 000:440.541 - 4.858ms returns 0x00
+TD058 000:440.622 JLINK_EraseChip()
+TD058 000:441.054   Old firmware which does not support pausing periodic actions during flash download
+TD058 000:441.201   CPU_ReadMem(4 bytes @ 0xE000ED90)
+TD058 000:442.025    -- --------------------------------------
+TD058 000:442.093    -- Start of determining dirty areas
+TD058 000:442.152    -- End of determining dirty areas
+TD058 000:442.260    -- Start of preparing flash programming
+TD058 000:442.314    -- Calculating RAM usage
+TD058 000:442.387    -- RAM usage = 2988 Bytes
+TD058 000:442.439    -- Preserving CPU registers
+TD058 000:442.510    -- Preparing memory
+TD058 000:442.562    -- Preparing target
+TD058 000:442.614    -- Downloading RAMCode
+TD058 000:487.502    -- Preparing RAMCode
+TD058 000:499.278    -- Checking target RAM
+TD058 000:501.564    -- End of preparing flash programming
+TD058 000:502.091   Looking for J-Link GUI Server exe at: C:\Program Files\SEGGER\JLink\JLinkGUIServer.exe
+TD058 000:502.237   Forking J-Link GUI Server: C:\Program Files\SEGGER\JLink\JLinkGUIServer.exe
+TD058 000:687.627   J-Link GUI Server info: "J-Link GUI server V7.54d "
+TD058 000:828.130    -- CPU speed could not be measured.
+TD058 000:828.258    -- Start of erasing chip
+TD058 001:275.074    -- End of erasing chip
+TD058 001:275.176    -- Start of restoring
+TD058 001:275.227    -- Restoring RAMCode
+TD058 001:283.046    -- Restore target
+TD058 001:283.221    -- Restore memory
+TD058 001:283.291    -- Restoring CPU registers
+TD058 001:283.407    -- End of restoring
+TD058 001:283.476    -- Total time needed: 0.841s (Prepare: 0.385s, Compare: 0.000s, Erase: 0.446s, Program: 0.000s, Verify: 0.000s, Restore: 0.008s)
+TD058 001:324.158   CPU_WriteMem(4 bytes @ 0xE0002000)
+TD058 001:325.036   CPU_ReadMem(4 bytes @ 0xE0002008)
+TD058 001:325.949   CPU_WriteMem(4 bytes @ 0xE000EDF4)
+TD058 001:326.801   CPU_ReadMem(4 bytes @ 0xE000EDF8)
+TD058 001:327.628   CPU_WriteMem(4 bytes @ 0xE0002008)
+TD058 001:328.510   CPU_WriteMem(4 bytes @ 0xE000EDF8)
+TD058 001:329.436   CPU_WriteMem(4 bytes @ 0xE000EDF4)
+TD058 001:330.423   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+TD058 001:331.331   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+TD058 001:332.199   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+TD058 001:333.178   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+TD058 001:334.128   CPU_WriteMem(4 bytes @ 0xE0002008)
+TD058 001:335.055   CPU_WriteMem(4 bytes @ 0xE000EDF8)
+TD058 001:335.886   CPU_WriteMem(4 bytes @ 0xE000EDF4)
+TD058 001:337.180 - 896.623ms returns 0
+TD058 001:337.334 JLINK_IsHalted()
+TD058 001:338.094 - 0.806ms returns TRUE
+TD058 001:338.772 JLINK_DownloadFile()
+TD058 001:339.841   Data:  00 10 00 20 01 32 00 08 A1 09 00 08 A3 09 00 08 ...
+TD058 001:340.223   completely In flash
+TD058 001:340.311    -- Read from flash cache (15832 bytes @ 0x08000000)
+TD058 001:340.820   Old firmware which does not support pausing periodic actions during flash download
+TD058 001:340.892   CPU_ReadMem(4 bytes @ 0xE000ED90)
+TD058 001:341.685    -- --------------------------------------
+TD058 001:341.839   Flash bank @ 0x08000000: Default: L2 verify disabled because algorithm performs L1 verify
+TD058 001:341.938    -- Start of determining dirty areas in flash cache
+TD058 001:342.049    -- End of determining dirty areas
+TD058 001:342.146    -- Start of preparing flash programming
+TD058 001:342.270    -- Calculating RAM usage
+TD058 001:342.400    -- RAM usage = 2988 Bytes
+TD058 001:342.526    -- Preserving CPU registers
+TD058 001:342.613    -- Preparing memory
+TD058 001:342.665    -- Preparing target
+TD058 001:342.740    -- Preserving target RAM temporarily used for programming
+TD058 001:387.632    -- Downloading RAMCode
+TD058 001:432.934    -- Preparing RAMCode
+TD058 001:447.264    -- End of preparing flash programming
+TD058 001:455.784    -- CPU speed could not be measured.
+TD058 001:455.877    -- Start of comparing flash
+TD058 001:455.934    -- CRC check was estimated as fastest method
+TD058 001:598.585    -- Comparing range 0x8000000 - 0x8003FFF (16 Sectors, 16 KB), using multi-block CRC calculation
+TD058 001:639.573    -- CRC does not match for sectors 0-15
+TD058 001:639.670    -- End of comparing flash
+TD058 001:639.724    -- Start of erasing sectors
+TD058 001:639.810    -- End of erasing sectors
+TD058 001:639.878    -- Start of flash programming
+TD058 001:639.943    -- Programming range 0x08000000 - 0x08003FFF ( 16 Sectors, 16 KB)
+TD058 002:728.561    -- End of flash programming
+TD058 002:728.661    -- 0x8000000 - 0x8003FFF ( 16 Sectors, 16 KoB)
+TD058 002:728.715    -- Start of restoring
+TD058 002:728.766    -- Restoring RAMCode
+TD058 002:760.812    -- Restoring target memory
+TD058 002:804.584    -- Restore target
+TD058 002:804.707    -- Restore memory
+TD058 002:804.775    -- Restoring CPU registers
+TD058 002:804.842    -- End of restoring
+TD058 002:804.899    -- Bank 0 @ 0x08000000: 1 range affected (16384 bytes)
+TD058 002:804.952    -- Total: 1.462s (Prepare: 0.113s, Compare: 0.183s, Erase: 0.000s, Program & Verify: 1.114s, Restore: 0.050s)
+TD058 002:805.005    -- Program & Verify speed: 14 KB/s
+TD058 002:836.353   CPU_WriteMem(4 bytes @ 0xE0002000)
+TD058 002:837.246   CPU_ReadMem(4 bytes @ 0xE0002008)
+TD058 002:838.086   CPU_WriteMem(4 bytes @ 0xE000EDF4)
+TD058 002:838.997   CPU_ReadMem(4 bytes @ 0xE000EDF8)
+TD058 002:839.872   CPU_WriteMem(4 bytes @ 0xE0002008)
+TD058 002:840.776   CPU_WriteMem(4 bytes @ 0xE000EDF8)
+TD058 002:841.703   CPU_WriteMem(4 bytes @ 0xE000EDF4)
+TD058 002:842.585   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+TD058 002:843.414   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+TD058 002:844.225   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+TD058 002:844.987   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+TD058 002:845.765   CPU_WriteMem(4 bytes @ 0xE0002008)
+TD058 002:846.609   CPU_WriteMem(4 bytes @ 0xE000EDF8)
+TD058 002:847.629   CPU_WriteMem(4 bytes @ 0xE000EDF4)
+TD058 002:848.891 - 1510.170ms returns 0x00
+TD058 002:849.018 JLINK_GetResetTypeDesc
+TD058 002:849.062 - 0.061ms
+TD058 002:849.104 JLINK_SetResetDelay(0)
+TD058 002:849.141 - 0.057ms
+TD058 002:849.185 JLINK_Reset()
+TD058 002:849.236   CPU_ReadMem(4 bytes @ 0x20000000)
+TD058 002:850.055   CPU_WriteMem(4 bytes @ 0x20000000)
+TD058 002:851.072   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+TD058 002:851.972   CPU_WriteMem(4 bytes @ 0xE000EDFC)
+TD058 002:852.779   Reset: Halt core after reset via DEMCR.VC_CORERESET.
+TD058 002:853.733   Reset: Reset device via AIRCR.SYSRESETREQ.
+TD058 002:853.821   CPU_WriteMem(4 bytes @ 0xE000ED0C)
+TD058 002:908.123   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+TD058 002:908.992   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+TD058 002:909.835   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+TD058 002:910.682   CPU_WriteMem(4 bytes @ 0xE000EDFC)
+TD058 002:916.681   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+TD058 002:922.418   CPU_WriteMem(4 bytes @ 0xE0002000)
+TD058 002:923.271   CPU_ReadMem(4 bytes @ 0xE000EDFC)
+TD058 002:924.088   CPU_ReadMem(4 bytes @ 0xE0001000)
+TD058 002:924.943   CPU_WriteMem(4 bytes @ 0xE0001000)
+TD058 002:925.764 - 76.607ms
+TD058 002:925.847 JLINK_IsOpen()
+TD058 002:925.883 - 0.053ms returns 0x01
+TD058 002:935.069 JLINK_Close()
+TD058 002:935.740   CPU_ReadMem(4 bytes @ 0xE0001000)
+TD058 002:936.750   CPU_WriteMem(4 bytes @ 0xE0001000)
+TD058 002:937.638   CPU_WriteMem(4 bytes @ 0xE0001004)
+TD058 003:041.171 - 106.184ms
+TD058 003:041.272   
+TD058 003:041.305   Closed

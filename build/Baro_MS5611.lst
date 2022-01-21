@@ -1,0 +1,479 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Baro_MS5611.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata.MS5611_Reset.str1.1,"aMS",%progbits,1
+  18              	.LC0:
+  19 0000 1E00     		.ascii	"\036\000"
+  20              		.section	.text.MS5611_Reset,"ax",%progbits
+  21              		.align	1
+  22              		.global	MS5611_Reset
+  23              		.syntax unified
+  24              		.code	16
+  25              		.thumb_func
+  27              	MS5611_Reset:
+  28              	.LVL0:
+  29              	.LFB43:
+  30              		.file 1 "Modules/Sensors/Baro_MS5611.c"
+   1:Modules/Sensors/Baro_MS5611.c **** #include "Baro_MS5611.h"
+   2:Modules/Sensors/Baro_MS5611.c **** 
+   3:Modules/Sensors/Baro_MS5611.c **** void MS5611_Reset(Sens_MS5611 *handle) {
+  31              		.loc 1 3 40 view -0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 8
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+   4:Modules/Sensors/Baro_MS5611.c **** 	uint8_t temp[1] = {MS5611_CMD_RESET};
+  35              		.loc 1 4 2 view .LVU1
+   3:Modules/Sensors/Baro_MS5611.c **** 	uint8_t temp[1] = {MS5611_CMD_RESET};
+  36              		.loc 1 3 40 is_stmt 0 view .LVU2
+  37 0000 13B5     		push	{r0, r1, r4, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 16
+  40              		.cfi_offset 0, -16
+  41              		.cfi_offset 1, -12
+  42              		.cfi_offset 4, -8
+  43              		.cfi_offset 14, -4
+  44              		.loc 1 4 10 view .LVU3
+  45 0002 074B     		ldr	r3, .L2
+  46 0004 01AC     		add	r4, sp, #4
+  47 0006 1B78     		ldrb	r3, [r3]
+   5:Modules/Sensors/Baro_MS5611.c **** 	
+   6:Modules/Sensors/Baro_MS5611.c **** 	Spi_EnableDevice(SPI_BARO);
+  48              		.loc 1 6 2 view .LVU4
+  49 0008 0020     		movs	r0, #0
+  50              	.LVL1:
+   7:Modules/Sensors/Baro_MS5611.c **** 	Spi_TransmitData(temp, MS5611_CMD_SIZE);
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 2
+
+
+   8:Modules/Sensors/Baro_MS5611.c **** 	//Spi_ReceiveData(byte, 1);
+   9:Modules/Sensors/Baro_MS5611.c **** 	Spi_DisableDevice(SPI_BARO);
+  10:Modules/Sensors/Baro_MS5611.c **** }
+  51              		.loc 1 10 1 view .LVU5
+  52              		@ sp needed
+   4:Modules/Sensors/Baro_MS5611.c **** 	
+  53              		.loc 1 4 10 view .LVU6
+  54 000a 2370     		strb	r3, [r4]
+   6:Modules/Sensors/Baro_MS5611.c **** 	Spi_TransmitData(temp, MS5611_CMD_SIZE);
+  55              		.loc 1 6 2 is_stmt 1 view .LVU7
+  56 000c FFF7FEFF 		bl	Spi_EnableDevice
+  57              	.LVL2:
+   7:Modules/Sensors/Baro_MS5611.c **** 	Spi_TransmitData(temp, MS5611_CMD_SIZE);
+  58              		.loc 1 7 2 view .LVU8
+  59 0010 0121     		movs	r1, #1
+  60 0012 2000     		movs	r0, r4
+  61 0014 FFF7FEFF 		bl	Spi_TransmitData
+  62              	.LVL3:
+   9:Modules/Sensors/Baro_MS5611.c **** }
+  63              		.loc 1 9 2 view .LVU9
+  64 0018 0020     		movs	r0, #0
+  65 001a FFF7FEFF 		bl	Spi_DisableDevice
+  66              	.LVL4:
+  67              		.loc 1 10 1 is_stmt 0 view .LVU10
+  68 001e 13BD     		pop	{r0, r1, r4, pc}
+  69              	.L3:
+  70              		.align	2
+  71              	.L2:
+  72 0020 00000000 		.word	.LC0
+  73              		.cfi_endproc
+  74              	.LFE43:
+  76              		.section	.text.MS5611_Read16Bits,"ax",%progbits
+  77              		.align	1
+  78              		.global	MS5611_Read16Bits
+  79              		.syntax unified
+  80              		.code	16
+  81              		.thumb_func
+  83              	MS5611_Read16Bits:
+  84              	.LVL5:
+  85              	.LFB44:
+  11:Modules/Sensors/Baro_MS5611.c **** 
+  12:Modules/Sensors/Baro_MS5611.c **** uint16_t MS5611_Read16Bits(uint8_t cmd) {
+  86              		.loc 1 12 41 is_stmt 1 view -0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 8
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  13:Modules/Sensors/Baro_MS5611.c **** 	uint8_t temp[1] = {cmd};
+  90              		.loc 1 13 2 view .LVU12
+  12:Modules/Sensors/Baro_MS5611.c **** 	uint8_t temp[1] = {cmd};
+  91              		.loc 1 12 41 is_stmt 0 view .LVU13
+  92 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+  93              	.LCFI1:
+  94              		.cfi_def_cfa_offset 24
+  95              		.cfi_offset 0, -24
+  96              		.cfi_offset 1, -20
+  97              		.cfi_offset 2, -16
+  98              		.cfi_offset 4, -12
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 3
+
+
+  99              		.cfi_offset 5, -8
+ 100              		.cfi_offset 14, -4
+ 101              		.loc 1 13 10 view .LVU14
+ 102 0002 6B46     		mov	r3, sp
+ 103 0004 1870     		strb	r0, [r3]
+  14:Modules/Sensors/Baro_MS5611.c **** 	uint8_t byte[3];
+ 104              		.loc 1 14 2 is_stmt 1 view .LVU15
+  15:Modules/Sensors/Baro_MS5611.c **** 	uint16_t value;
+ 105              		.loc 1 15 2 view .LVU16
+  16:Modules/Sensors/Baro_MS5611.c **** 	
+  17:Modules/Sensors/Baro_MS5611.c **** 	uint8_t status;
+ 106              		.loc 1 17 2 view .LVU17
+  18:Modules/Sensors/Baro_MS5611.c **** 	
+  19:Modules/Sensors/Baro_MS5611.c **** 	Spi_EnableDevice(SPI_BARO);
+ 107              		.loc 1 19 2 view .LVU18
+ 108 0006 0020     		movs	r0, #0
+ 109              	.LVL6:
+ 110              		.loc 1 19 2 is_stmt 0 view .LVU19
+ 111 0008 FFF7FEFF 		bl	Spi_EnableDevice
+ 112              	.LVL7:
+  20:Modules/Sensors/Baro_MS5611.c **** 	status = Spi_TransmitData(temp, MS5611_CMD_SIZE);
+ 113              		.loc 1 20 2 is_stmt 1 view .LVU20
+ 114              		.loc 1 20 11 is_stmt 0 view .LVU21
+ 115 000c 0121     		movs	r1, #1
+ 116 000e 6846     		mov	r0, sp
+ 117 0010 FFF7FEFF 		bl	Spi_TransmitData
+ 118              	.LVL8:
+  21:Modules/Sensors/Baro_MS5611.c **** 	HAL_Delay(1);
+ 119              		.loc 1 21 2 is_stmt 1 view .LVU22
+  22:Modules/Sensors/Baro_MS5611.c **** 	status = Spi_ReceiveData(byte, 2);
+ 120              		.loc 1 22 11 is_stmt 0 view .LVU23
+ 121 0014 01AD     		add	r5, sp, #4
+  21:Modules/Sensors/Baro_MS5611.c **** 	HAL_Delay(1);
+ 122              		.loc 1 21 2 view .LVU24
+ 123 0016 0120     		movs	r0, #1
+ 124 0018 FFF7FEFF 		bl	HAL_Delay
+ 125              	.LVL9:
+ 126              		.loc 1 22 2 is_stmt 1 view .LVU25
+ 127              		.loc 1 22 11 is_stmt 0 view .LVU26
+ 128 001c 0221     		movs	r1, #2
+ 129 001e 2800     		movs	r0, r5
+ 130 0020 FFF7FEFF 		bl	Spi_ReceiveData
+ 131              	.LVL10:
+ 132 0024 0400     		movs	r4, r0
+ 133              	.LVL11:
+  23:Modules/Sensors/Baro_MS5611.c **** 	Spi_DisableDevice(SPI_BARO);
+ 134              		.loc 1 23 2 is_stmt 1 view .LVU27
+ 135 0026 0020     		movs	r0, #0
+ 136 0028 FFF7FEFF 		bl	Spi_DisableDevice
+ 137              	.LVL12:
+  24:Modules/Sensors/Baro_MS5611.c **** 	
+  25:Modules/Sensors/Baro_MS5611.c **** 	HAL_Delay(1);
+ 138              		.loc 1 25 2 view .LVU28
+ 139 002c 0120     		movs	r0, #1
+ 140 002e FFF7FEFF 		bl	HAL_Delay
+ 141              	.LVL13:
+  26:Modules/Sensors/Baro_MS5611.c **** 	if(status == 0) {
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 4
+
+
+ 142              		.loc 1 26 2 view .LVU29
+ 143              		.loc 1 26 4 is_stmt 0 view .LVU30
+ 144 0032 002C     		cmp	r4, #0
+ 145 0034 03D1     		bne	.L6
+  27:Modules/Sensors/Baro_MS5611.c **** 		value = ((uint16_t)byte[0] << 8) | (byte[1]);
+ 146              		.loc 1 27 3 is_stmt 1 view .LVU31
+ 147 0036 2888     		ldrh	r0, [r5]
+ 148 0038 40BA     		rev16	r0, r0
+ 149 003a 80B2     		uxth	r0, r0
+ 150              	.LVL14:
+ 151              	.L5:
+  28:Modules/Sensors/Baro_MS5611.c **** 	}
+  29:Modules/Sensors/Baro_MS5611.c **** 	else {
+  30:Modules/Sensors/Baro_MS5611.c **** 		value = -1;
+  31:Modules/Sensors/Baro_MS5611.c **** 	}
+  32:Modules/Sensors/Baro_MS5611.c **** 	
+  33:Modules/Sensors/Baro_MS5611.c **** 	return value;
+ 152              		.loc 1 33 2 view .LVU32
+  34:Modules/Sensors/Baro_MS5611.c **** }
+ 153              		.loc 1 34 1 is_stmt 0 view .LVU33
+ 154              		@ sp needed
+ 155              	.LVL15:
+ 156              		.loc 1 34 1 view .LVU34
+ 157 003c 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 158              	.LVL16:
+ 159              	.L6:
+  30:Modules/Sensors/Baro_MS5611.c **** 	}
+ 160              		.loc 1 30 9 view .LVU35
+ 161 003e 0148     		ldr	r0, .L7
+ 162 0040 FCE7     		b	.L5
+ 163              	.L8:
+ 164 0042 C046     		.align	2
+ 165              	.L7:
+ 166 0044 FFFF0000 		.word	65535
+ 167              		.cfi_endproc
+ 168              	.LFE44:
+ 170              		.section	.rodata.MS5611_GetPROM.str1.1,"aMS",%progbits,1
+ 171              	.LC2:
+ 172 0000 25642C25 		.ascii	"%d,%d,%d,%d,%d,%d,%d,%d\015\012\000"
+ 172      642C2564 
+ 172      2C25642C 
+ 172      25642C25 
+ 172      642C2564 
+ 173              		.section	.text.MS5611_GetPROM,"ax",%progbits
+ 174              		.align	1
+ 175              		.global	MS5611_GetPROM
+ 176              		.syntax unified
+ 177              		.code	16
+ 178              		.thumb_func
+ 180              	MS5611_GetPROM:
+ 181              	.LVL17:
+ 182              	.LFB45:
+  35:Modules/Sensors/Baro_MS5611.c **** 
+  36:Modules/Sensors/Baro_MS5611.c **** 
+  37:Modules/Sensors/Baro_MS5611.c **** uint8_t MS5611_GetPROM(Sens_MS5611 *handle) {
+ 183              		.loc 1 37 45 is_stmt 1 view -0
+ 184              		.cfi_startproc
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 5
+
+
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+  38:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[0] = MS5611_Read16Bits(MS5611_PROM_READ_0);
+ 187              		.loc 1 38 2 view .LVU37
+  37:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[0] = MS5611_Read16Bits(MS5611_PROM_READ_0);
+ 188              		.loc 1 37 45 is_stmt 0 view .LVU38
+ 189 0000 10B5     		push	{r4, lr}
+ 190              	.LCFI2:
+ 191              		.cfi_def_cfa_offset 8
+ 192              		.cfi_offset 4, -8
+ 193              		.cfi_offset 14, -4
+ 194 0002 0400     		movs	r4, r0
+ 195 0004 86B0     		sub	sp, sp, #24
+ 196              	.LCFI3:
+ 197              		.cfi_def_cfa_offset 32
+ 198              		.loc 1 38 20 view .LVU39
+ 199 0006 A020     		movs	r0, #160
+ 200              	.LVL18:
+ 201              		.loc 1 38 20 view .LVU40
+ 202 0008 FFF7FEFF 		bl	MS5611_Read16Bits
+ 203              	.LVL19:
+ 204              		.loc 1 38 18 view .LVU41
+ 205 000c 6080     		strh	r0, [r4, #2]
+  39:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[1] = MS5611_Read16Bits(MS5611_PROM_READ_1);
+ 206              		.loc 1 39 2 is_stmt 1 view .LVU42
+ 207              		.loc 1 39 20 is_stmt 0 view .LVU43
+ 208 000e A220     		movs	r0, #162
+ 209 0010 FFF7FEFF 		bl	MS5611_Read16Bits
+ 210              	.LVL20:
+ 211              		.loc 1 39 18 view .LVU44
+ 212 0014 A080     		strh	r0, [r4, #4]
+  40:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[2] = MS5611_Read16Bits(MS5611_PROM_READ_2);
+ 213              		.loc 1 40 2 is_stmt 1 view .LVU45
+ 214              		.loc 1 40 20 is_stmt 0 view .LVU46
+ 215 0016 A420     		movs	r0, #164
+ 216 0018 FFF7FEFF 		bl	MS5611_Read16Bits
+ 217              	.LVL21:
+ 218              		.loc 1 40 18 view .LVU47
+ 219 001c E080     		strh	r0, [r4, #6]
+  41:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[3] = MS5611_Read16Bits(MS5611_PROM_READ_3);
+ 220              		.loc 1 41 2 is_stmt 1 view .LVU48
+ 221              		.loc 1 41 20 is_stmt 0 view .LVU49
+ 222 001e A620     		movs	r0, #166
+ 223 0020 FFF7FEFF 		bl	MS5611_Read16Bits
+ 224              	.LVL22:
+ 225              		.loc 1 41 18 view .LVU50
+ 226 0024 2081     		strh	r0, [r4, #8]
+  42:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[4] = MS5611_Read16Bits(MS5611_PROM_READ_4);
+ 227              		.loc 1 42 2 is_stmt 1 view .LVU51
+ 228              		.loc 1 42 20 is_stmt 0 view .LVU52
+ 229 0026 A820     		movs	r0, #168
+ 230 0028 FFF7FEFF 		bl	MS5611_Read16Bits
+ 231              	.LVL23:
+ 232              		.loc 1 42 18 view .LVU53
+ 233 002c 6081     		strh	r0, [r4, #10]
+  43:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[5] = MS5611_Read16Bits(MS5611_PROM_READ_5);
+ 234              		.loc 1 43 2 is_stmt 1 view .LVU54
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 6
+
+
+ 235              		.loc 1 43 20 is_stmt 0 view .LVU55
+ 236 002e AA20     		movs	r0, #170
+ 237 0030 FFF7FEFF 		bl	MS5611_Read16Bits
+ 238              	.LVL24:
+ 239              		.loc 1 43 18 view .LVU56
+ 240 0034 A081     		strh	r0, [r4, #12]
+  44:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[6] = MS5611_Read16Bits(MS5611_PROM_READ_6);
+ 241              		.loc 1 44 2 is_stmt 1 view .LVU57
+ 242              		.loc 1 44 20 is_stmt 0 view .LVU58
+ 243 0036 AC20     		movs	r0, #172
+ 244 0038 FFF7FEFF 		bl	MS5611_Read16Bits
+ 245              	.LVL25:
+ 246              		.loc 1 44 18 view .LVU59
+ 247 003c E081     		strh	r0, [r4, #14]
+  45:Modules/Sensors/Baro_MS5611.c **** 	handle->prom[7] = MS5611_Read16Bits(MS5611_PROM_READ_7);
+ 248              		.loc 1 45 2 is_stmt 1 view .LVU60
+ 249              		.loc 1 45 20 is_stmt 0 view .LVU61
+ 250 003e AE20     		movs	r0, #174
+ 251 0040 FFF7FEFF 		bl	MS5611_Read16Bits
+ 252              	.LVL26:
+ 253              		.loc 1 45 18 view .LVU62
+ 254 0044 2082     		strh	r0, [r4, #16]
+  46:Modules/Sensors/Baro_MS5611.c **** 	
+  47:Modules/Sensors/Baro_MS5611.c **** 	Debug_Printf("%d,%d,%d,%d,%d,%d,%d,%d\r\n", handle->prom[0], handle->prom[1], handle->prom[2], han
+ 255              		.loc 1 47 2 is_stmt 1 view .LVU63
+ 256 0046 0490     		str	r0, [sp, #16]
+ 257 0048 E089     		ldrh	r0, [r4, #14]
+ 258 004a E388     		ldrh	r3, [r4, #6]
+ 259 004c 0390     		str	r0, [sp, #12]
+ 260 004e A089     		ldrh	r0, [r4, #12]
+ 261 0050 A288     		ldrh	r2, [r4, #4]
+ 262 0052 0290     		str	r0, [sp, #8]
+ 263 0054 6089     		ldrh	r0, [r4, #10]
+ 264 0056 6188     		ldrh	r1, [r4, #2]
+ 265 0058 0190     		str	r0, [sp, #4]
+ 266 005a 2089     		ldrh	r0, [r4, #8]
+ 267 005c 0090     		str	r0, [sp]
+ 268 005e 0248     		ldr	r0, .L10
+ 269 0060 FFF7FEFF 		bl	Debug_Printf
+ 270              	.LVL27:
+  48:Modules/Sensors/Baro_MS5611.c **** 												handle->prom[4], handle->prom[5], handle->prom[6], handle->prom[7]);
+  49:Modules/Sensors/Baro_MS5611.c **** }
+ 271              		.loc 1 49 1 is_stmt 0 view .LVU64
+ 272 0064 06B0     		add	sp, sp, #24
+ 273              		@ sp needed
+ 274              	.LVL28:
+ 275              		.loc 1 49 1 view .LVU65
+ 276 0066 10BD     		pop	{r4, pc}
+ 277              	.L11:
+ 278              		.align	2
+ 279              	.L10:
+ 280 0068 00000000 		.word	.LC2
+ 281              		.cfi_endproc
+ 282              	.LFE45:
+ 284              		.section	.text.Baro_Init,"ax",%progbits
+ 285              		.align	1
+ 286              		.global	Baro_Init
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 7
+
+
+ 287              		.syntax unified
+ 288              		.code	16
+ 289              		.thumb_func
+ 291              	Baro_Init:
+ 292              	.LVL29:
+ 293              	.LFB46:
+  50:Modules/Sensors/Baro_MS5611.c **** 
+  51:Modules/Sensors/Baro_MS5611.c **** // void MS5611_GetTemperature(void) {
+  52:Modules/Sensors/Baro_MS5611.c **** // 	uint32_t t;
+  53:Modules/Sensors/Baro_MS5611.c **** // 	//Debug_Printf("%d\n\r", t);
+  54:Modules/Sensors/Baro_MS5611.c **** // }
+  55:Modules/Sensors/Baro_MS5611.c **** 
+  56:Modules/Sensors/Baro_MS5611.c **** uint8_t Baro_Init(Sens_MS5611 *handle) {
+ 294              		.loc 1 56 40 is_stmt 1 view -0
+ 295              		.cfi_startproc
+ 296              		@ args = 0, pretend = 0, frame = 0
+ 297              		@ frame_needed = 0, uses_anonymous_args = 0
+  57:Modules/Sensors/Baro_MS5611.c **** 	//Debug_Printf("MS5611 initial started.\r\n");
+  58:Modules/Sensors/Baro_MS5611.c **** 	
+  59:Modules/Sensors/Baro_MS5611.c **** 	Spi_DisableDevice(SPI_BARO);
+ 298              		.loc 1 59 2 view .LVU67
+  56:Modules/Sensors/Baro_MS5611.c **** 	//Debug_Printf("MS5611 initial started.\r\n");
+ 299              		.loc 1 56 40 is_stmt 0 view .LVU68
+ 300 0000 10B5     		push	{r4, lr}
+ 301              	.LCFI4:
+ 302              		.cfi_def_cfa_offset 8
+ 303              		.cfi_offset 4, -8
+ 304              		.cfi_offset 14, -4
+  56:Modules/Sensors/Baro_MS5611.c **** 	//Debug_Printf("MS5611 initial started.\r\n");
+ 305              		.loc 1 56 40 view .LVU69
+ 306 0002 0400     		movs	r4, r0
+  60:Modules/Sensors/Baro_MS5611.c **** 	MS5611_Reset(handle);
+  61:Modules/Sensors/Baro_MS5611.c **** 	HAL_Delay(50);
+  62:Modules/Sensors/Baro_MS5611.c **** 	MS5611_GetPROM(handle);
+  63:Modules/Sensors/Baro_MS5611.c **** 	if(handle->prom[0] == 0) {
+  64:Modules/Sensors/Baro_MS5611.c **** 		return 0;
+  65:Modules/Sensors/Baro_MS5611.c **** 	}
+  66:Modules/Sensors/Baro_MS5611.c **** 	else {
+  67:Modules/Sensors/Baro_MS5611.c **** 		return 1;
+  68:Modules/Sensors/Baro_MS5611.c **** 	}
+  69:Modules/Sensors/Baro_MS5611.c **** 	
+  70:Modules/Sensors/Baro_MS5611.c **** }
+ 307              		.loc 1 70 1 view .LVU70
+ 308              		@ sp needed
+  59:Modules/Sensors/Baro_MS5611.c **** 	MS5611_Reset(handle);
+ 309              		.loc 1 59 2 view .LVU71
+ 310 0004 0020     		movs	r0, #0
+ 311              	.LVL30:
+  59:Modules/Sensors/Baro_MS5611.c **** 	MS5611_Reset(handle);
+ 312              		.loc 1 59 2 view .LVU72
+ 313 0006 FFF7FEFF 		bl	Spi_DisableDevice
+ 314              	.LVL31:
+  60:Modules/Sensors/Baro_MS5611.c **** 	MS5611_Reset(handle);
+ 315              		.loc 1 60 2 is_stmt 1 view .LVU73
+ 316 000a 2000     		movs	r0, r4
+ 317 000c FFF7FEFF 		bl	MS5611_Reset
+ 318              	.LVL32:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 8
+
+
+  61:Modules/Sensors/Baro_MS5611.c **** 	MS5611_GetPROM(handle);
+ 319              		.loc 1 61 2 view .LVU74
+ 320 0010 3220     		movs	r0, #50
+ 321 0012 FFF7FEFF 		bl	HAL_Delay
+ 322              	.LVL33:
+  62:Modules/Sensors/Baro_MS5611.c **** 	if(handle->prom[0] == 0) {
+ 323              		.loc 1 62 2 view .LVU75
+ 324 0016 2000     		movs	r0, r4
+ 325 0018 FFF7FEFF 		bl	MS5611_GetPROM
+ 326              	.LVL34:
+  63:Modules/Sensors/Baro_MS5611.c **** 		return 0;
+ 327              		.loc 1 63 2 view .LVU76
+  63:Modules/Sensors/Baro_MS5611.c **** 		return 0;
+ 328              		.loc 1 63 4 is_stmt 0 view .LVU77
+ 329 001c 6088     		ldrh	r0, [r4, #2]
+ 330 001e 431E     		subs	r3, r0, #1
+ 331 0020 9841     		sbcs	r0, r0, r3
+ 332              		.loc 1 70 1 view .LVU78
+ 333 0022 C0B2     		uxtb	r0, r0
+ 334              	.LVL35:
+ 335              		.loc 1 70 1 view .LVU79
+ 336 0024 10BD     		pop	{r4, pc}
+ 337              		.cfi_endproc
+ 338              	.LFE46:
+ 340              		.text
+ 341              	.Letext0:
+ 342              		.file 2 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 343              		.file 3 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 344              		.file 4 "Modules/Sensors/Baro_MS5611.h"
+ 345              		.file 5 "Modules/Connectivity/Spi_Driver.h"
+ 346              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
+ 347              		.file 7 "Modules/Connectivity/Uart_Driver.h"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 Baro_MS5611.c
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:21     .text.MS5611_Reset:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:27     .text.MS5611_Reset:00000000 MS5611_Reset
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:72     .text.MS5611_Reset:00000020 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:77     .text.MS5611_Read16Bits:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:83     .text.MS5611_Read16Bits:00000000 MS5611_Read16Bits
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:166    .text.MS5611_Read16Bits:00000044 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:174    .text.MS5611_GetPROM:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:180    .text.MS5611_GetPROM:00000000 MS5611_GetPROM
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:280    .text.MS5611_GetPROM:00000068 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:285    .text.Baro_Init:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccmScSrD.s:291    .text.Baro_Init:00000000 Baro_Init
+
+UNDEFINED SYMBOLS
+Spi_EnableDevice
+Spi_TransmitData
+Spi_DisableDevice
+HAL_Delay
+Spi_ReceiveData
+Debug_Printf

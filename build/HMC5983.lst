@@ -1,0 +1,172 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6RvY62.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"HMC5983.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata.HMC5983_Init.str1.1,"aMS",%progbits,1
+  18              	.LC0:
+  19 0000 484D4335 		.ascii	"HMC5983 ID=%x %x %x\015\012\000"
+  19      39383320 
+  19      49443D25 
+  19      78202578 
+  19      2025780D 
+  20              		.section	.text.HMC5983_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	HMC5983_Init
+  23              		.syntax unified
+  24              		.code	16
+  25              		.thumb_func
+  27              	HMC5983_Init:
+  28              	.LVL0:
+  29              	.LFB43:
+  30              		.file 1 "Modules/Sensors/HMC5983.c"
+   1:Modules/Sensors/HMC5983.c **** #include "HMC5983.h"
+   2:Modules/Sensors/HMC5983.c **** 
+   3:Modules/Sensors/HMC5983.c **** uint8_t HMC5983_Init(Sens_HMC5983 *handle) {
+  31              		.loc 1 3 44 view -0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 8
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+   4:Modules/Sensors/HMC5983.c **** 	//Debug_Printf("HMC5983 initial started.\r\n");
+   5:Modules/Sensors/HMC5983.c **** 	uint8_t id[3];
+  35              		.loc 1 5 2 view .LVU1
+   6:Modules/Sensors/HMC5983.c **** 	Spi_DisableDevice(SPI_HMC);
+  36              		.loc 1 6 2 view .LVU2
+   3:Modules/Sensors/HMC5983.c **** 	//Debug_Printf("HMC5983 initial started.\r\n");
+  37              		.loc 1 3 44 is_stmt 0 view .LVU3
+  38 0000 13B5     		push	{r0, r1, r4, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 16
+  41              		.cfi_offset 0, -16
+  42              		.cfi_offset 1, -12
+  43              		.cfi_offset 4, -8
+  44              		.cfi_offset 14, -4
+  45              		.loc 1 6 2 view .LVU4
+  46 0002 0220     		movs	r0, #2
+  47              	.LVL1:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6RvY62.s 			page 2
+
+
+  48              		.loc 1 6 2 view .LVU5
+  49 0004 FFF7FEFF 		bl	Spi_DisableDevice
+  50              	.LVL2:
+   7:Modules/Sensors/HMC5983.c **** 	HAL_Delay(50);
+  51              		.loc 1 7 2 is_stmt 1 view .LVU6
+   8:Modules/Sensors/HMC5983.c **** 	Spi_ReadDeviceReg(SPI_HMC, HMC5983_ID_A, id);
+  52              		.loc 1 8 2 is_stmt 0 view .LVU7
+  53 0008 01AC     		add	r4, sp, #4
+   7:Modules/Sensors/HMC5983.c **** 	HAL_Delay(50);
+  54              		.loc 1 7 2 view .LVU8
+  55 000a 3220     		movs	r0, #50
+  56 000c FFF7FEFF 		bl	HAL_Delay
+  57              	.LVL3:
+  58              		.loc 1 8 2 is_stmt 1 view .LVU9
+  59 0010 2200     		movs	r2, r4
+  60 0012 0A21     		movs	r1, #10
+  61 0014 0220     		movs	r0, #2
+  62 0016 FFF7FEFF 		bl	Spi_ReadDeviceReg
+  63              	.LVL4:
+   9:Modules/Sensors/HMC5983.c **** 	Spi_ReadDeviceReg(SPI_HMC, HMC5983_ID_A + 1, id + 1);
+  64              		.loc 1 9 2 view .LVU10
+  65 001a 6B46     		mov	r3, sp
+  66 001c 0B21     		movs	r1, #11
+  67 001e 5A1D     		adds	r2, r3, #5
+  68 0020 0220     		movs	r0, #2
+  69 0022 FFF7FEFF 		bl	Spi_ReadDeviceReg
+  70              	.LVL5:
+  10:Modules/Sensors/HMC5983.c **** 	Spi_ReadDeviceReg(SPI_HMC, HMC5983_ID_A + 2, id + 2);
+  71              		.loc 1 10 2 view .LVU11
+  72 0026 6B46     		mov	r3, sp
+  73 0028 0C21     		movs	r1, #12
+  74 002a 9A1D     		adds	r2, r3, #6
+  75 002c 0220     		movs	r0, #2
+  76 002e FFF7FEFF 		bl	Spi_ReadDeviceReg
+  77              	.LVL6:
+  11:Modules/Sensors/HMC5983.c **** 	
+  12:Modules/Sensors/HMC5983.c **** 	Debug_Printf("HMC5983 ID=%x %x %x\r\n", id[0], id[1], id[2]);
+  78              		.loc 1 12 2 view .LVU12
+  79 0032 A378     		ldrb	r3, [r4, #2]
+  80 0034 0848     		ldr	r0, .L5
+  81 0036 6278     		ldrb	r2, [r4, #1]
+  82 0038 2178     		ldrb	r1, [r4]
+  83 003a FFF7FEFF 		bl	Debug_Printf
+  84              	.LVL7:
+  13:Modules/Sensors/HMC5983.c **** 	//Debug_Printf("HMC5983 initial succeeded.\r\n\r\n");
+  14:Modules/Sensors/HMC5983.c **** 	if(id[0] == 0x48 && id[1] == 0x34 && id[2] == 0x33) {
+  85              		.loc 1 14 2 view .LVU13
+  86              		.loc 1 14 4 is_stmt 0 view .LVU14
+  87 003e 2378     		ldrb	r3, [r4]
+  15:Modules/Sensors/HMC5983.c **** 		return 0;
+  16:Modules/Sensors/HMC5983.c **** 	}
+  17:Modules/Sensors/HMC5983.c **** 	else {
+  18:Modules/Sensors/HMC5983.c **** 		return 1;
+  88              		.loc 1 18 10 view .LVU15
+  89 0040 0120     		movs	r0, #1
+  14:Modules/Sensors/HMC5983.c **** 		return 0;
+  90              		.loc 1 14 4 view .LVU16
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6RvY62.s 			page 3
+
+
+  91 0042 482B     		cmp	r3, #72
+  92 0044 07D1     		bne	.L2
+  14:Modules/Sensors/HMC5983.c **** 		return 0;
+  93              		.loc 1 14 19 discriminator 1 view .LVU17
+  94 0046 6378     		ldrb	r3, [r4, #1]
+  95 0048 342B     		cmp	r3, #52
+  96 004a 04D1     		bne	.L2
+  14:Modules/Sensors/HMC5983.c **** 		return 0;
+  97              		.loc 1 14 36 discriminator 2 view .LVU18
+  98 004c A078     		ldrb	r0, [r4, #2]
+  99 004e 3338     		subs	r0, r0, #51
+ 100 0050 431E     		subs	r3, r0, #1
+ 101 0052 9841     		sbcs	r0, r0, r3
+ 102              		.loc 1 18 10 discriminator 2 view .LVU19
+ 103 0054 C0B2     		uxtb	r0, r0
+ 104              	.L2:
+  19:Modules/Sensors/HMC5983.c **** 	}
+  20:Modules/Sensors/HMC5983.c **** }...
+ 105              		.loc 1 20 1 view .LVU20
+ 106              		@ sp needed
+ 107 0056 16BD     		pop	{r1, r2, r4, pc}
+ 108              	.L6:
+ 109              		.align	2
+ 110              	.L5:
+ 111 0058 00000000 		.word	.LC0
+ 112              		.cfi_endproc
+ 113              	.LFE43:
+ 115              		.text
+ 116              	.Letext0:
+ 117              		.file 2 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 118              		.file 3 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 119              		.file 4 "Modules/Sensors/HMC5983.h"
+ 120              		.file 5 "Modules/Connectivity/Spi_Driver.h"
+ 121              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
+ 122              		.file 7 "Modules/Connectivity/Uart_Driver.h"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6RvY62.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 HMC5983.c
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6RvY62.s:21     .text.HMC5983_Init:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6RvY62.s:27     .text.HMC5983_Init:00000000 HMC5983_Init
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6RvY62.s:111    .text.HMC5983_Init:00000058 $d
+
+UNDEFINED SYMBOLS
+Spi_DisableDevice
+HAL_Delay
+Spi_ReadDeviceReg
+Debug_Printf

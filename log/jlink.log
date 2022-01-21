@@ -1,0 +1,58 @@
+SEGGER J-Link Commander V7.54d (Compiled Sep 28 2021 16:20:01)
+DLL version V7.54d, compiled Sep 28 2021 16:18:43
+
+
+J-Link Command File read successfully.
+Processing script file...
+
+J-Link connection not established yet but required for command.
+Connecting to J-Link via USB...O.K.
+Firmware: J-Link ARM V8 compiled Nov 28 2014 13:44:46
+Hardware version: V8.00
+S/N: 788591439
+License(s): RDI,FlashDL,FlashBP,JFlash,GDB
+VTref=3.306V
+
+Target connection not established yet but required for command.
+Device "STM32F030F4" selected.
+
+
+Connecting to target via SWD
+InitTarget() start
+InitTarget() end
+Found SW-DP with ID 0x0BB11477
+DPv0 detected
+Scanning AP map to find all available APs
+AP[1]: Stopped AP scan as end of AP map has been reached
+AP[0]: AHB-AP (IDR: 0x04770021)
+Iterating through AP map to find AHB-AP to use
+AP[0]: Core found
+AP[0]: AHB-AP ROM base: 0xE00FF000
+CPUID register: 0x410CC200. Implementer code: 0x41 (ARM)
+Found Cortex-M0 r0p0, Little endian.
+FPUnit: 4 code (BP) slots and 0 literal slots
+CoreSight components:
+ROMTbl[0] @ E00FF000
+[0][0]: E000E000 CID B105E00D PID 000BB008 SCS
+[0][1]: E0001000 CID B105E00D PID 000BB00A DWT
+[0][2]: E0002000 CID B105E00D PID 000BB00B FPB
+Cortex-M0 identified.
+Without any given address range, Erase Chip will be executed
+Erasing device...
+J-Link: Flash download: Total time needed: 0.841s (Prepare: 0.385s, Compare: 0.000s, Erase: 0.446s, Program: 0.000s, Verify: 0.000s, Restore: 0.008s)
+Erasing done.
+
+Downloading file [./build/chaser_imu.hex]...
+J-Link: Flash download: Bank 0 @ 0x08000000: 1 range affected (16384 bytes)
+J-Link: Flash download: Total: 1.462s (Prepare: 0.113s, Compare: 0.183s, Erase: 0.000s, Program & Verify: 1.114s, Restore: 0.050s)
+J-Link: Flash download: Program & Verify speed: 14 KB/s
+O.K.
+
+Reset delay: 0 ms
+Reset type NORMAL: Resets core & peripherals via SYSRESETREQ & VECTRESET bit.
+Reset: Halt core after reset via DEMCR.VC_CORERESET.
+Reset: Reset device via AIRCR.SYSRESETREQ.
+
+
+Script processing completed.
+

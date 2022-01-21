@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "D:/Keil_v5/ARM/ARMCC/include",
+                "Core/Inc",
+                "Drivers/CMSIS/Device/ST/STM32F0xx/Include",
+                "Drivers/CMSIS/Include",
+                "Drivers/STM32F0xx_HAL_Driver/Inc",
+                "Drivers/STM32F0xx_HAL_Driver/Inc/Legacy"
+            ],
+            "defines": [
+                "DEBUG",
+                "STM32F030x6",
+                "USE_HAL_DRIVER"
+            ],
+            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}

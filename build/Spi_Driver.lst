@@ -1,0 +1,766 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Spi_Driver.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Spi_ReceiveData,"ax",%progbits
+  18              		.align	1
+  19              		.global	Spi_ReceiveData
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	Spi_ReceiveData:
+  25              	.LVL0:
+  26              	.LFB43:
+  27              		.file 1 "Modules/Connectivity/Spi_Driver.c"
+   1:Modules/Connectivity/Spi_Driver.c **** #include "Spi_Driver.h"
+   2:Modules/Connectivity/Spi_Driver.c **** 
+   3:Modules/Connectivity/Spi_Driver.c **** static uint8_t tx, rx;
+   4:Modules/Connectivity/Spi_Driver.c **** static uint8_t tx_buff[14];
+   5:Modules/Connectivity/Spi_Driver.c **** 
+   6:Modules/Connectivity/Spi_Driver.c **** uint8_t Spi_ReceiveData(uint8_t *pData, uint16_t size) {
+  28              		.loc 1 6 56 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+   7:Modules/Connectivity/Spi_Driver.c **** 	HAL_StatusTypeDef status;
+  32              		.loc 1 7 2 view .LVU1
+   8:Modules/Connectivity/Spi_Driver.c **** 	
+   9:Modules/Connectivity/Spi_Driver.c **** 	status = HAL_SPI_Receive_DMA(&hspi1, pData, size);
+  33              		.loc 1 9 2 view .LVU2
+   6:Modules/Connectivity/Spi_Driver.c **** 	HAL_StatusTypeDef status;
+  34              		.loc 1 6 56 is_stmt 0 view .LVU3
+  35 0000 0A00     		movs	r2, r1
+  36 0002 10B5     		push	{r4, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 4, -8
+  40              		.cfi_offset 14, -4
+  41              		.loc 1 9 11 view .LVU4
+  42 0004 0100     		movs	r1, r0
+  43              	.LVL1:
+  10:Modules/Connectivity/Spi_Driver.c **** 	
+  11:Modules/Connectivity/Spi_Driver.c **** 	return (status == HAL_OK) ? 0 : 1;
+  12:Modules/Connectivity/Spi_Driver.c **** }
+  44              		.loc 1 12 1 view .LVU5
+  45              		@ sp needed
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 2
+
+
+   9:Modules/Connectivity/Spi_Driver.c **** 	
+  46              		.loc 1 9 11 view .LVU6
+  47 0006 0348     		ldr	r0, .L2
+  48              	.LVL2:
+   9:Modules/Connectivity/Spi_Driver.c **** 	
+  49              		.loc 1 9 11 view .LVU7
+  50 0008 FFF7FEFF 		bl	HAL_SPI_Receive_DMA
+  51              	.LVL3:
+  11:Modules/Connectivity/Spi_Driver.c **** }
+  52              		.loc 1 11 2 is_stmt 1 view .LVU8
+  11:Modules/Connectivity/Spi_Driver.c **** }
+  53              		.loc 1 11 32 is_stmt 0 view .LVU9
+  54 000c 431E     		subs	r3, r0, #1
+  55 000e 9841     		sbcs	r0, r0, r3
+  56              	.LVL4:
+  11:Modules/Connectivity/Spi_Driver.c **** }
+  57              		.loc 1 11 32 view .LVU10
+  58 0010 C0B2     		uxtb	r0, r0
+  59              		.loc 1 12 1 view .LVU11
+  60 0012 10BD     		pop	{r4, pc}
+  61              	.L3:
+  62              		.align	2
+  63              	.L2:
+  64 0014 00000000 		.word	hspi1
+  65              		.cfi_endproc
+  66              	.LFE43:
+  68              		.section	.text.Spi_TransmitData,"ax",%progbits
+  69              		.align	1
+  70              		.global	Spi_TransmitData
+  71              		.syntax unified
+  72              		.code	16
+  73              		.thumb_func
+  75              	Spi_TransmitData:
+  76              	.LVL5:
+  77              	.LFB44:
+  13:Modules/Connectivity/Spi_Driver.c **** 
+  14:Modules/Connectivity/Spi_Driver.c **** uint8_t Spi_TransmitData(uint8_t *pData, uint16_t size) {
+  78              		.loc 1 14 57 is_stmt 1 view -0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  15:Modules/Connectivity/Spi_Driver.c **** 	HAL_StatusTypeDef status;
+  82              		.loc 1 15 2 view .LVU13
+  16:Modules/Connectivity/Spi_Driver.c **** 	
+  17:Modules/Connectivity/Spi_Driver.c **** 	status = HAL_SPI_Transmit_DMA(&hspi1, pData, size);
+  83              		.loc 1 17 2 view .LVU14
+  14:Modules/Connectivity/Spi_Driver.c **** 	HAL_StatusTypeDef status;
+  84              		.loc 1 14 57 is_stmt 0 view .LVU15
+  85 0000 0A00     		movs	r2, r1
+  86 0002 10B5     		push	{r4, lr}
+  87              	.LCFI1:
+  88              		.cfi_def_cfa_offset 8
+  89              		.cfi_offset 4, -8
+  90              		.cfi_offset 14, -4
+  91              		.loc 1 17 11 view .LVU16
+  92 0004 0100     		movs	r1, r0
+  93              	.LVL6:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 3
+
+
+  18:Modules/Connectivity/Spi_Driver.c **** 	
+  19:Modules/Connectivity/Spi_Driver.c **** 	return (status == HAL_OK) ? 0 : 1;
+  20:Modules/Connectivity/Spi_Driver.c **** }
+  94              		.loc 1 20 1 view .LVU17
+  95              		@ sp needed
+  17:Modules/Connectivity/Spi_Driver.c **** 	
+  96              		.loc 1 17 11 view .LVU18
+  97 0006 0348     		ldr	r0, .L5
+  98              	.LVL7:
+  17:Modules/Connectivity/Spi_Driver.c **** 	
+  99              		.loc 1 17 11 view .LVU19
+ 100 0008 FFF7FEFF 		bl	HAL_SPI_Transmit_DMA
+ 101              	.LVL8:
+  19:Modules/Connectivity/Spi_Driver.c **** }
+ 102              		.loc 1 19 2 is_stmt 1 view .LVU20
+  19:Modules/Connectivity/Spi_Driver.c **** }
+ 103              		.loc 1 19 32 is_stmt 0 view .LVU21
+ 104 000c 431E     		subs	r3, r0, #1
+ 105 000e 9841     		sbcs	r0, r0, r3
+ 106              	.LVL9:
+  19:Modules/Connectivity/Spi_Driver.c **** }
+ 107              		.loc 1 19 32 view .LVU22
+ 108 0010 C0B2     		uxtb	r0, r0
+ 109              		.loc 1 20 1 view .LVU23
+ 110 0012 10BD     		pop	{r4, pc}
+ 111              	.L6:
+ 112              		.align	2
+ 113              	.L5:
+ 114 0014 00000000 		.word	hspi1
+ 115              		.cfi_endproc
+ 116              	.LFE44:
+ 118              		.section	.text.Spi_TransmitReceiveData,"ax",%progbits
+ 119              		.align	1
+ 120              		.global	Spi_TransmitReceiveData
+ 121              		.syntax unified
+ 122              		.code	16
+ 123              		.thumb_func
+ 125              	Spi_TransmitReceiveData:
+ 126              	.LVL10:
+ 127              	.LFB45:
+  21:Modules/Connectivity/Spi_Driver.c **** 
+  22:Modules/Connectivity/Spi_Driver.c **** uint8_t Spi_TransmitReceiveData(uint8_t *pTxData, uint8_t *pRxData, uint16_t size) {
+ 128              		.loc 1 22 84 is_stmt 1 view -0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+  23:Modules/Connectivity/Spi_Driver.c **** 	HAL_StatusTypeDef status;
+ 132              		.loc 1 23 2 view .LVU25
+  24:Modules/Connectivity/Spi_Driver.c **** 	
+  25:Modules/Connectivity/Spi_Driver.c **** 	status = HAL_SPI_TransmitReceive_DMA(&hspi1, pTxData, pRxData, size);
+ 133              		.loc 1 25 2 view .LVU26
+  22:Modules/Connectivity/Spi_Driver.c **** 	HAL_StatusTypeDef status;
+ 134              		.loc 1 22 84 is_stmt 0 view .LVU27
+ 135 0000 1300     		movs	r3, r2
+ 136 0002 10B5     		push	{r4, lr}
+ 137              	.LCFI2:
+ 138              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 4
+
+
+ 139              		.cfi_offset 4, -8
+ 140              		.cfi_offset 14, -4
+ 141              		.loc 1 25 11 view .LVU28
+ 142 0004 0A00     		movs	r2, r1
+ 143              	.LVL11:
+  26:Modules/Connectivity/Spi_Driver.c **** 	
+  27:Modules/Connectivity/Spi_Driver.c **** 	return (status == HAL_OK) ? 0 : 1;
+  28:Modules/Connectivity/Spi_Driver.c **** }
+ 144              		.loc 1 28 1 view .LVU29
+ 145              		@ sp needed
+  25:Modules/Connectivity/Spi_Driver.c **** 	
+ 146              		.loc 1 25 11 view .LVU30
+ 147 0006 0100     		movs	r1, r0
+ 148              	.LVL12:
+  25:Modules/Connectivity/Spi_Driver.c **** 	
+ 149              		.loc 1 25 11 view .LVU31
+ 150 0008 0348     		ldr	r0, .L8
+ 151              	.LVL13:
+  25:Modules/Connectivity/Spi_Driver.c **** 	
+ 152              		.loc 1 25 11 view .LVU32
+ 153 000a FFF7FEFF 		bl	HAL_SPI_TransmitReceive_DMA
+ 154              	.LVL14:
+  27:Modules/Connectivity/Spi_Driver.c **** }
+ 155              		.loc 1 27 2 is_stmt 1 view .LVU33
+  27:Modules/Connectivity/Spi_Driver.c **** }
+ 156              		.loc 1 27 32 is_stmt 0 view .LVU34
+ 157 000e 431E     		subs	r3, r0, #1
+ 158 0010 9841     		sbcs	r0, r0, r3
+ 159              	.LVL15:
+  27:Modules/Connectivity/Spi_Driver.c **** }
+ 160              		.loc 1 27 32 view .LVU35
+ 161 0012 C0B2     		uxtb	r0, r0
+ 162              		.loc 1 28 1 view .LVU36
+ 163 0014 10BD     		pop	{r4, pc}
+ 164              	.L9:
+ 165 0016 C046     		.align	2
+ 166              	.L8:
+ 167 0018 00000000 		.word	hspi1
+ 168              		.cfi_endproc
+ 169              	.LFE45:
+ 171              		.section	.text.Spi_EnableDevice,"ax",%progbits
+ 172              		.align	1
+ 173              		.global	Spi_EnableDevice
+ 174              		.syntax unified
+ 175              		.code	16
+ 176              		.thumb_func
+ 178              	Spi_EnableDevice:
+ 179              	.LVL16:
+ 180              	.LFB46:
+  29:Modules/Connectivity/Spi_Driver.c **** 
+  30:Modules/Connectivity/Spi_Driver.c **** void Spi_EnableDevice(uint8_t device) {
+ 181              		.loc 1 30 39 is_stmt 1 view -0
+ 182              		.cfi_startproc
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 0, uses_anonymous_args = 0
+  31:Modules/Connectivity/Spi_Driver.c **** 	switch (device) {
+ 185              		.loc 1 31 2 view .LVU38
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 5
+
+
+  30:Modules/Connectivity/Spi_Driver.c **** 	switch (device) {
+ 186              		.loc 1 30 39 is_stmt 0 view .LVU39
+ 187 0000 0100     		movs	r1, r0
+ 188 0002 10B5     		push	{r4, lr}
+ 189              	.LCFI3:
+ 190              		.cfi_def_cfa_offset 8
+ 191              		.cfi_offset 4, -8
+ 192              		.cfi_offset 14, -4
+ 193              		.loc 1 31 2 view .LVU40
+ 194 0004 0128     		cmp	r0, #1
+ 195 0006 0AD0     		beq	.L11
+ 196 0008 0228     		cmp	r0, #2
+ 197 000a 0BD0     		beq	.L12
+ 198 000c 0028     		cmp	r0, #0
+ 199 000e 05D1     		bne	.L10
+ 200              	.LBB4:
+ 201              	.LBI4:
+  30:Modules/Connectivity/Spi_Driver.c **** 	switch (device) {
+ 202              		.loc 1 30 6 is_stmt 1 view .LVU41
+ 203              	.LVL17:
+ 204              	.LBB5:
+  32:Modules/Connectivity/Spi_Driver.c **** 		case SPI_BARO:
+  33:Modules/Connectivity/Spi_Driver.c **** 			HAL_GPIO_WritePin(BARO_CS_GPIO_Port, BARO_CS_Pin, GPIO_PIN_RESET);
+ 205              		.loc 1 33 4 view .LVU42
+ 206 0010 0200     		movs	r2, r0
+ 207 0012 0231     		adds	r1, r1, #2
+ 208              	.LVL18:
+ 209              	.L15:
+ 210              		.loc 1 33 4 is_stmt 0 view .LVU43
+ 211              	.LBE5:
+ 212              	.LBE4:
+  34:Modules/Connectivity/Spi_Driver.c **** 			break;
+  35:Modules/Connectivity/Spi_Driver.c **** 		case SPI_ICM:
+  36:Modules/Connectivity/Spi_Driver.c **** 			HAL_GPIO_WritePin(ICM_CS_GPIO_Port, ICM_CS_Pin, GPIO_PIN_RESET);
+ 213              		.loc 1 36 4 view .LVU44
+ 214 0014 9020     		movs	r0, #144
+ 215              	.LVL19:
+ 216              		.loc 1 36 4 view .LVU45
+ 217 0016 C005     		lsls	r0, r0, #23
+ 218              	.L14:
+  37:Modules/Connectivity/Spi_Driver.c **** 			break;
+  38:Modules/Connectivity/Spi_Driver.c **** 		case SPI_HMC:
+  39:Modules/Connectivity/Spi_Driver.c **** 			HAL_GPIO_WritePin(HMC_CS_GPIO_Port, HMC_CS_Pin, GPIO_PIN_RESET);
+ 219              		.loc 1 39 4 view .LVU46
+ 220 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 221              	.LVL20:
+  40:Modules/Connectivity/Spi_Driver.c **** 			break;
+ 222              		.loc 1 40 4 is_stmt 1 view .LVU47
+ 223              	.L10:
+  41:Modules/Connectivity/Spi_Driver.c **** 		default:
+  42:Modules/Connectivity/Spi_Driver.c **** 			break;
+  43:Modules/Connectivity/Spi_Driver.c **** 	}
+  44:Modules/Connectivity/Spi_Driver.c **** }
+ 224              		.loc 1 44 1 is_stmt 0 view .LVU48
+ 225              		@ sp needed
+ 226 001c 10BD     		pop	{r4, pc}
+ 227              	.LVL21:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 6
+
+
+ 228              	.L11:
+  36:Modules/Connectivity/Spi_Driver.c **** 			break;
+ 229              		.loc 1 36 4 is_stmt 1 view .LVU49
+ 230 001e 0022     		movs	r2, #0
+ 231 0020 1021     		movs	r1, #16
+ 232 0022 F7E7     		b	.L15
+ 233              	.L12:
+  39:Modules/Connectivity/Spi_Driver.c **** 			break;
+ 234              		.loc 1 39 4 view .LVU50
+ 235 0024 0022     		movs	r2, #0
+ 236 0026 0148     		ldr	r0, .L16
+ 237              	.LVL22:
+  39:Modules/Connectivity/Spi_Driver.c **** 			break;
+ 238              		.loc 1 39 4 is_stmt 0 view .LVU51
+ 239 0028 F6E7     		b	.L14
+ 240              	.L17:
+ 241 002a C046     		.align	2
+ 242              	.L16:
+ 243 002c 00040048 		.word	1207960576
+ 244              		.cfi_endproc
+ 245              	.LFE46:
+ 247              		.section	.text.Spi_DisableDevice,"ax",%progbits
+ 248              		.align	1
+ 249              		.global	Spi_DisableDevice
+ 250              		.syntax unified
+ 251              		.code	16
+ 252              		.thumb_func
+ 254              	Spi_DisableDevice:
+ 255              	.LVL23:
+ 256              	.LFB47:
+  45:Modules/Connectivity/Spi_Driver.c **** 
+  46:Modules/Connectivity/Spi_Driver.c **** void Spi_DisableDevice(uint8_t device) {
+ 257              		.loc 1 46 40 is_stmt 1 view -0
+ 258              		.cfi_startproc
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+  47:Modules/Connectivity/Spi_Driver.c **** 	HAL_GPIO_WritePin(BARO_CS_GPIO_Port, BARO_CS_Pin, GPIO_PIN_SET);
+ 261              		.loc 1 47 2 view .LVU53
+  46:Modules/Connectivity/Spi_Driver.c **** 	HAL_GPIO_WritePin(BARO_CS_GPIO_Port, BARO_CS_Pin, GPIO_PIN_SET);
+ 262              		.loc 1 46 40 is_stmt 0 view .LVU54
+ 263 0000 10B5     		push	{r4, lr}
+ 264              	.LCFI4:
+ 265              		.cfi_def_cfa_offset 8
+ 266              		.cfi_offset 4, -8
+ 267              		.cfi_offset 14, -4
+ 268              		.loc 1 47 2 view .LVU55
+ 269 0002 9024     		movs	r4, #144
+  48:Modules/Connectivity/Spi_Driver.c **** 	HAL_GPIO_WritePin(ICM_CS_GPIO_Port, ICM_CS_Pin, GPIO_PIN_SET);
+  49:Modules/Connectivity/Spi_Driver.c **** 	HAL_GPIO_WritePin(HMC_CS_GPIO_Port, HMC_CS_Pin, GPIO_PIN_SET);
+  50:Modules/Connectivity/Spi_Driver.c **** }
+ 270              		.loc 1 50 1 view .LVU56
+ 271              		@ sp needed
+  47:Modules/Connectivity/Spi_Driver.c **** 	HAL_GPIO_WritePin(ICM_CS_GPIO_Port, ICM_CS_Pin, GPIO_PIN_SET);
+ 272              		.loc 1 47 2 view .LVU57
+ 273 0004 E405     		lsls	r4, r4, #23
+ 274 0006 2000     		movs	r0, r4
+ 275              	.LVL24:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 7
+
+
+  47:Modules/Connectivity/Spi_Driver.c **** 	HAL_GPIO_WritePin(ICM_CS_GPIO_Port, ICM_CS_Pin, GPIO_PIN_SET);
+ 276              		.loc 1 47 2 view .LVU58
+ 277 0008 0122     		movs	r2, #1
+ 278 000a 0221     		movs	r1, #2
+ 279 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 280              	.LVL25:
+  48:Modules/Connectivity/Spi_Driver.c **** 	HAL_GPIO_WritePin(ICM_CS_GPIO_Port, ICM_CS_Pin, GPIO_PIN_SET);
+ 281              		.loc 1 48 2 is_stmt 1 view .LVU59
+ 282 0010 2000     		movs	r0, r4
+ 283 0012 0122     		movs	r2, #1
+ 284 0014 1021     		movs	r1, #16
+ 285 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 286              	.LVL26:
+  49:Modules/Connectivity/Spi_Driver.c **** }
+ 287              		.loc 1 49 2 view .LVU60
+ 288 001a 0122     		movs	r2, #1
+ 289 001c 0221     		movs	r1, #2
+ 290 001e 0248     		ldr	r0, .L19
+ 291 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 292              	.LVL27:
+ 293              		.loc 1 50 1 is_stmt 0 view .LVU61
+ 294 0024 10BD     		pop	{r4, pc}
+ 295              	.L20:
+ 296 0026 C046     		.align	2
+ 297              	.L19:
+ 298 0028 00040048 		.word	1207960576
+ 299              		.cfi_endproc
+ 300              	.LFE47:
+ 302              		.section	.text.Spi_ReadDeviceBuffer,"ax",%progbits
+ 303              		.align	1
+ 304              		.global	Spi_ReadDeviceBuffer
+ 305              		.syntax unified
+ 306              		.code	16
+ 307              		.thumb_func
+ 309              	Spi_ReadDeviceBuffer:
+ 310              	.LVL28:
+ 311              	.LFB48:
+  51:Modules/Connectivity/Spi_Driver.c **** 
+  52:Modules/Connectivity/Spi_Driver.c **** uint8_t Spi_ReadDeviceBuffer(uint8_t device, uint8_t regAddr, uint8_t *pData, uint8_t size) {
+ 312              		.loc 1 52 93 is_stmt 1 view -0
+ 313              		.cfi_startproc
+ 314              		@ args = 0, pretend = 0, frame = 8
+ 315              		@ frame_needed = 0, uses_anonymous_args = 0
+  53:Modules/Connectivity/Spi_Driver.c **** 	uint8_t status_1,status_2;
+ 316              		.loc 1 53 2 view .LVU63
+  54:Modules/Connectivity/Spi_Driver.c **** 	
+  55:Modules/Connectivity/Spi_Driver.c **** 	Spi_EnableDevice(device);
+ 317              		.loc 1 55 2 view .LVU64
+  52:Modules/Connectivity/Spi_Driver.c **** 	uint8_t status_1,status_2;
+ 318              		.loc 1 52 93 is_stmt 0 view .LVU65
+ 319 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 320              	.LCFI5:
+ 321              		.cfi_def_cfa_offset 32
+ 322              		.cfi_offset 0, -32
+ 323              		.cfi_offset 1, -28
+ 324              		.cfi_offset 2, -24
+ 325              		.cfi_offset 4, -20
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 8
+
+
+ 326              		.cfi_offset 5, -16
+ 327              		.cfi_offset 6, -12
+ 328              		.cfi_offset 7, -8
+ 329              		.cfi_offset 14, -4
+  52:Modules/Connectivity/Spi_Driver.c **** 	uint8_t status_1,status_2;
+ 330              		.loc 1 52 93 view .LVU66
+ 331 0002 1C00     		movs	r4, r3
+  56:Modules/Connectivity/Spi_Driver.c **** 	tx = regAddr | 0x80;
+  57:Modules/Connectivity/Spi_Driver.c **** 	tx_buff[0] = tx;
+  58:Modules/Connectivity/Spi_Driver.c **** 	status_1 = Spi_TransmitReceiveData(&tx, &rx, 1);
+  59:Modules/Connectivity/Spi_Driver.c **** 	status_2 = Spi_TransmitReceiveData(tx_buff, pData, size);
+  60:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+  61:Modules/Connectivity/Spi_Driver.c **** 	
+  62:Modules/Connectivity/Spi_Driver.c **** 	return status_1 || status_2;
+  63:Modules/Connectivity/Spi_Driver.c **** }
+ 332              		.loc 1 63 1 view .LVU67
+ 333              		@ sp needed
+  52:Modules/Connectivity/Spi_Driver.c **** 	uint8_t status_1,status_2;
+ 334              		.loc 1 52 93 view .LVU68
+ 335 0004 0500     		movs	r5, r0
+ 336 0006 1600     		movs	r6, r2
+ 337 0008 0F00     		movs	r7, r1
+  55:Modules/Connectivity/Spi_Driver.c **** 	tx = regAddr | 0x80;
+ 338              		.loc 1 55 2 view .LVU69
+ 339 000a FFF7FEFF 		bl	Spi_EnableDevice
+ 340              	.LVL29:
+  56:Modules/Connectivity/Spi_Driver.c **** 	tx = regAddr | 0x80;
+ 341              		.loc 1 56 2 is_stmt 1 view .LVU70
+  56:Modules/Connectivity/Spi_Driver.c **** 	tx = regAddr | 0x80;
+ 342              		.loc 1 56 5 is_stmt 0 view .LVU71
+ 343 000e 8021     		movs	r1, #128
+ 344 0010 0C48     		ldr	r0, .L22
+ 345 0012 3943     		orrs	r1, r7
+  57:Modules/Connectivity/Spi_Driver.c **** 	status_1 = Spi_TransmitReceiveData(&tx, &rx, 1);
+ 346              		.loc 1 57 13 view .LVU72
+ 347 0014 0C4F     		ldr	r7, .L22+4
+  58:Modules/Connectivity/Spi_Driver.c **** 	status_2 = Spi_TransmitReceiveData(tx_buff, pData, size);
+ 348              		.loc 1 58 13 view .LVU73
+ 349 0016 0122     		movs	r2, #1
+  57:Modules/Connectivity/Spi_Driver.c **** 	status_1 = Spi_TransmitReceiveData(&tx, &rx, 1);
+ 350              		.loc 1 57 13 view .LVU74
+ 351 0018 3970     		strb	r1, [r7]
+  56:Modules/Connectivity/Spi_Driver.c **** 	tx_buff[0] = tx;
+ 352              		.loc 1 56 5 view .LVU75
+ 353 001a 0170     		strb	r1, [r0]
+  57:Modules/Connectivity/Spi_Driver.c **** 	status_1 = Spi_TransmitReceiveData(&tx, &rx, 1);
+ 354              		.loc 1 57 2 is_stmt 1 view .LVU76
+  58:Modules/Connectivity/Spi_Driver.c **** 	status_2 = Spi_TransmitReceiveData(tx_buff, pData, size);
+ 355              		.loc 1 58 2 view .LVU77
+  58:Modules/Connectivity/Spi_Driver.c **** 	status_2 = Spi_TransmitReceiveData(tx_buff, pData, size);
+ 356              		.loc 1 58 13 is_stmt 0 view .LVU78
+ 357 001c 0B49     		ldr	r1, .L22+8
+ 358 001e FFF7FEFF 		bl	Spi_TransmitReceiveData
+ 359              	.LVL30:
+  59:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+ 360              		.loc 1 59 13 view .LVU79
+ 361 0022 3100     		movs	r1, r6
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 9
+
+
+ 362 0024 A2B2     		uxth	r2, r4
+  58:Modules/Connectivity/Spi_Driver.c **** 	status_2 = Spi_TransmitReceiveData(tx_buff, pData, size);
+ 363              		.loc 1 58 13 view .LVU80
+ 364 0026 0190     		str	r0, [sp, #4]
+ 365              	.LVL31:
+  59:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+ 366              		.loc 1 59 2 is_stmt 1 view .LVU81
+  59:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+ 367              		.loc 1 59 13 is_stmt 0 view .LVU82
+ 368 0028 3800     		movs	r0, r7
+ 369 002a FFF7FEFF 		bl	Spi_TransmitReceiveData
+ 370              	.LVL32:
+ 371 002e 0400     		movs	r4, r0
+ 372              	.LVL33:
+  60:Modules/Connectivity/Spi_Driver.c **** 	
+ 373              		.loc 1 60 2 is_stmt 1 view .LVU83
+ 374 0030 2800     		movs	r0, r5
+ 375 0032 FFF7FEFF 		bl	Spi_DisableDevice
+ 376              	.LVL34:
+  62:Modules/Connectivity/Spi_Driver.c **** }
+ 377              		.loc 1 62 2 view .LVU84
+  62:Modules/Connectivity/Spi_Driver.c **** }
+ 378              		.loc 1 62 18 is_stmt 0 view .LVU85
+ 379 0036 019B     		ldr	r3, [sp, #4]
+ 380 0038 2343     		orrs	r3, r4
+ 381 003a D8B2     		uxtb	r0, r3
+ 382 003c 431E     		subs	r3, r0, #1
+ 383 003e 9841     		sbcs	r0, r0, r3
+ 384 0040 C0B2     		uxtb	r0, r0
+ 385              	.LVL35:
+ 386              	.LVL36:
+ 387              		.loc 1 63 1 view .LVU86
+ 388 0042 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 389              	.L23:
+ 390              		.align	2
+ 391              	.L22:
+ 392 0044 00000000 		.word	.LANCHOR0
+ 393 0048 00000000 		.word	.LANCHOR1
+ 394 004c 00000000 		.word	.LANCHOR2
+ 395              		.cfi_endproc
+ 396              	.LFE48:
+ 398              		.section	.text.Spi_ReadDeviceReg,"ax",%progbits
+ 399              		.align	1
+ 400              		.global	Spi_ReadDeviceReg
+ 401              		.syntax unified
+ 402              		.code	16
+ 403              		.thumb_func
+ 405              	Spi_ReadDeviceReg:
+ 406              	.LVL37:
+ 407              	.LFB49:
+  64:Modules/Connectivity/Spi_Driver.c **** 
+  65:Modules/Connectivity/Spi_Driver.c **** uint8_t Spi_ReadDeviceReg(uint8_t device, uint8_t regAddr, uint8_t *pData) {
+ 408              		.loc 1 65 76 is_stmt 1 view -0
+ 409              		.cfi_startproc
+ 410              		@ args = 0, pretend = 0, frame = 0
+ 411              		@ frame_needed = 0, uses_anonymous_args = 0
+  66:Modules/Connectivity/Spi_Driver.c **** 	return Spi_ReadDeviceBuffer(device, regAddr, pData, 1);
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 10
+
+
+ 412              		.loc 1 66 2 view .LVU88
+  65:Modules/Connectivity/Spi_Driver.c **** 	return Spi_ReadDeviceBuffer(device, regAddr, pData, 1);
+ 413              		.loc 1 65 76 is_stmt 0 view .LVU89
+ 414 0000 10B5     		push	{r4, lr}
+ 415              	.LCFI6:
+ 416              		.cfi_def_cfa_offset 8
+ 417              		.cfi_offset 4, -8
+ 418              		.cfi_offset 14, -4
+ 419              		.loc 1 66 9 view .LVU90
+ 420 0002 0123     		movs	r3, #1
+  67:Modules/Connectivity/Spi_Driver.c **** }
+ 421              		.loc 1 67 1 view .LVU91
+ 422              		@ sp needed
+  66:Modules/Connectivity/Spi_Driver.c **** 	return Spi_ReadDeviceBuffer(device, regAddr, pData, 1);
+ 423              		.loc 1 66 9 view .LVU92
+ 424 0004 FFF7FEFF 		bl	Spi_ReadDeviceBuffer
+ 425              	.LVL38:
+ 426              		.loc 1 67 1 view .LVU93
+ 427 0008 10BD     		pop	{r4, pc}
+ 428              		.cfi_endproc
+ 429              	.LFE49:
+ 431              		.section	.text.Spi_WriteDeviceReg,"ax",%progbits
+ 432              		.align	1
+ 433              		.global	Spi_WriteDeviceReg
+ 434              		.syntax unified
+ 435              		.code	16
+ 436              		.thumb_func
+ 438              	Spi_WriteDeviceReg:
+ 439              	.LVL39:
+ 440              	.LFB50:
+  68:Modules/Connectivity/Spi_Driver.c **** 
+  69:Modules/Connectivity/Spi_Driver.c **** uint8_t Spi_WriteDeviceReg(uint8_t device, uint8_t reg, uint8_t value) {
+ 441              		.loc 1 69 72 is_stmt 1 view -0
+ 442              		.cfi_startproc
+ 443              		@ args = 0, pretend = 0, frame = 8
+ 444              		@ frame_needed = 0, uses_anonymous_args = 0
+  70:Modules/Connectivity/Spi_Driver.c **** 	uint8_t status_1,status_2;
+ 445              		.loc 1 70 2 view .LVU95
+  71:Modules/Connectivity/Spi_Driver.c **** 	
+  72:Modules/Connectivity/Spi_Driver.c **** 	Spi_EnableDevice(device);
+ 446              		.loc 1 72 2 view .LVU96
+  69:Modules/Connectivity/Spi_Driver.c **** 	uint8_t status_1,status_2;
+ 447              		.loc 1 69 72 is_stmt 0 view .LVU97
+ 448 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 449              	.LCFI7:
+ 450              		.cfi_def_cfa_offset 32
+ 451              		.cfi_offset 0, -32
+ 452              		.cfi_offset 1, -28
+ 453              		.cfi_offset 2, -24
+ 454              		.cfi_offset 4, -20
+ 455              		.cfi_offset 5, -16
+ 456              		.cfi_offset 6, -12
+ 457              		.cfi_offset 7, -8
+ 458              		.cfi_offset 14, -4
+  69:Modules/Connectivity/Spi_Driver.c **** 	uint8_t status_1,status_2;
+ 459              		.loc 1 69 72 view .LVU98
+ 460 0002 1600     		movs	r6, r2
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 11
+
+
+  73:Modules/Connectivity/Spi_Driver.c **** 	tx = reg & 0x7F;
+  74:Modules/Connectivity/Spi_Driver.c **** 	status_1 = Spi_TransmitReceiveData(&tx, &rx, 1);
+  75:Modules/Connectivity/Spi_Driver.c **** 	tx = value;
+  76:Modules/Connectivity/Spi_Driver.c **** 	status_2 = Spi_TransmitReceiveData(&tx, &rx, 1);
+  77:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+  78:Modules/Connectivity/Spi_Driver.c **** 	
+  79:Modules/Connectivity/Spi_Driver.c **** 	return status_1 || status_2;
+  80:Modules/Connectivity/Spi_Driver.c **** }
+ 461              		.loc 1 80 1 view .LVU99
+ 462              		@ sp needed
+  69:Modules/Connectivity/Spi_Driver.c **** 	uint8_t status_1,status_2;
+ 463              		.loc 1 69 72 view .LVU100
+ 464 0004 0400     		movs	r4, r0
+ 465 0006 0F00     		movs	r7, r1
+  72:Modules/Connectivity/Spi_Driver.c **** 	tx = reg & 0x7F;
+ 466              		.loc 1 72 2 view .LVU101
+ 467 0008 FFF7FEFF 		bl	Spi_EnableDevice
+ 468              	.LVL40:
+  73:Modules/Connectivity/Spi_Driver.c **** 	tx = reg & 0x7F;
+ 469              		.loc 1 73 2 is_stmt 1 view .LVU102
+  73:Modules/Connectivity/Spi_Driver.c **** 	tx = reg & 0x7F;
+ 470              		.loc 1 73 11 is_stmt 0 view .LVU103
+ 471 000c 7F21     		movs	r1, #127
+  73:Modules/Connectivity/Spi_Driver.c **** 	tx = reg & 0x7F;
+ 472              		.loc 1 73 5 view .LVU104
+ 473 000e 0D4D     		ldr	r5, .L26
+  73:Modules/Connectivity/Spi_Driver.c **** 	tx = reg & 0x7F;
+ 474              		.loc 1 73 11 view .LVU105
+ 475 0010 0F40     		ands	r7, r1
+  73:Modules/Connectivity/Spi_Driver.c **** 	tx = reg & 0x7F;
+ 476              		.loc 1 73 5 view .LVU106
+ 477 0012 2F70     		strb	r7, [r5]
+  74:Modules/Connectivity/Spi_Driver.c **** 	tx = value;
+ 478              		.loc 1 74 2 is_stmt 1 view .LVU107
+  74:Modules/Connectivity/Spi_Driver.c **** 	tx = value;
+ 479              		.loc 1 74 13 is_stmt 0 view .LVU108
+ 480 0014 0C4F     		ldr	r7, .L26+4
+ 481 0016 0122     		movs	r2, #1
+ 482 0018 3900     		movs	r1, r7
+ 483 001a 2800     		movs	r0, r5
+ 484 001c FFF7FEFF 		bl	Spi_TransmitReceiveData
+ 485              	.LVL41:
+  76:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+ 486              		.loc 1 76 13 view .LVU109
+ 487 0020 3900     		movs	r1, r7
+ 488 0022 0122     		movs	r2, #1
+  74:Modules/Connectivity/Spi_Driver.c **** 	tx = value;
+ 489              		.loc 1 74 13 view .LVU110
+ 490 0024 0190     		str	r0, [sp, #4]
+ 491              	.LVL42:
+  75:Modules/Connectivity/Spi_Driver.c **** 	status_2 = Spi_TransmitReceiveData(&tx, &rx, 1);
+ 492              		.loc 1 75 2 is_stmt 1 view .LVU111
+  76:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+ 493              		.loc 1 76 13 is_stmt 0 view .LVU112
+ 494 0026 2800     		movs	r0, r5
+  75:Modules/Connectivity/Spi_Driver.c **** 	status_2 = Spi_TransmitReceiveData(&tx, &rx, 1);
+ 495              		.loc 1 75 5 view .LVU113
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 12
+
+
+ 496 0028 2E70     		strb	r6, [r5]
+  76:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+ 497              		.loc 1 76 2 is_stmt 1 view .LVU114
+  76:Modules/Connectivity/Spi_Driver.c **** 	Spi_DisableDevice(device);
+ 498              		.loc 1 76 13 is_stmt 0 view .LVU115
+ 499 002a FFF7FEFF 		bl	Spi_TransmitReceiveData
+ 500              	.LVL43:
+ 501 002e 0500     		movs	r5, r0
+ 502              	.LVL44:
+  77:Modules/Connectivity/Spi_Driver.c **** 	
+ 503              		.loc 1 77 2 is_stmt 1 view .LVU116
+ 504 0030 2000     		movs	r0, r4
+ 505 0032 FFF7FEFF 		bl	Spi_DisableDevice
+ 506              	.LVL45:
+  79:Modules/Connectivity/Spi_Driver.c **** }
+ 507              		.loc 1 79 2 view .LVU117
+  79:Modules/Connectivity/Spi_Driver.c **** }
+ 508              		.loc 1 79 18 is_stmt 0 view .LVU118
+ 509 0036 019B     		ldr	r3, [sp, #4]
+ 510 0038 2B43     		orrs	r3, r5
+ 511 003a D8B2     		uxtb	r0, r3
+ 512 003c 431E     		subs	r3, r0, #1
+ 513 003e 9841     		sbcs	r0, r0, r3
+ 514 0040 C0B2     		uxtb	r0, r0
+ 515              	.LVL46:
+ 516              		.loc 1 80 1 view .LVU119
+ 517 0042 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 518              	.L27:
+ 519              		.align	2
+ 520              	.L26:
+ 521 0044 00000000 		.word	.LANCHOR0
+ 522 0048 00000000 		.word	.LANCHOR2
+ 523              		.cfi_endproc
+ 524              	.LFE50:
+ 526              		.section	.bss.rx,"aw",%nobits
+ 527              		.set	.LANCHOR2,. + 0
+ 530              	rx:
+ 531 0000 00       		.space	1
+ 532              		.section	.bss.tx,"aw",%nobits
+ 533              		.set	.LANCHOR0,. + 0
+ 536              	tx:
+ 537 0000 00       		.space	1
+ 538              		.section	.bss.tx_buff,"aw",%nobits
+ 539              		.set	.LANCHOR1,. + 0
+ 542              	tx_buff:
+ 543 0000 00000000 		.space	14
+ 543      00000000 
+ 543      00000000 
+ 543      0000
+ 544              		.text
+ 545              	.Letext0:
+ 546              		.file 2 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 547              		.file 3 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 548              		.file 4 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f030x6.h"
+ 549              		.file 5 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h"
+ 550              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio.h"
+ 551              		.file 7 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 13
+
+
+ 552              		.file 8 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_spi.h"
+ 553              		.file 9 "Core/Inc/spi.h"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 Spi_Driver.c
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:18     .text.Spi_ReceiveData:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:24     .text.Spi_ReceiveData:00000000 Spi_ReceiveData
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:64     .text.Spi_ReceiveData:00000014 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:69     .text.Spi_TransmitData:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:75     .text.Spi_TransmitData:00000000 Spi_TransmitData
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:114    .text.Spi_TransmitData:00000014 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:119    .text.Spi_TransmitReceiveData:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:125    .text.Spi_TransmitReceiveData:00000000 Spi_TransmitReceiveData
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:167    .text.Spi_TransmitReceiveData:00000018 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:172    .text.Spi_EnableDevice:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:178    .text.Spi_EnableDevice:00000000 Spi_EnableDevice
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:243    .text.Spi_EnableDevice:0000002c $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:248    .text.Spi_DisableDevice:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:254    .text.Spi_DisableDevice:00000000 Spi_DisableDevice
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:298    .text.Spi_DisableDevice:00000028 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:303    .text.Spi_ReadDeviceBuffer:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:309    .text.Spi_ReadDeviceBuffer:00000000 Spi_ReadDeviceBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:392    .text.Spi_ReadDeviceBuffer:00000044 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:399    .text.Spi_ReadDeviceReg:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:405    .text.Spi_ReadDeviceReg:00000000 Spi_ReadDeviceReg
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:432    .text.Spi_WriteDeviceReg:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:438    .text.Spi_WriteDeviceReg:00000000 Spi_WriteDeviceReg
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:521    .text.Spi_WriteDeviceReg:00000044 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:530    .bss.rx:00000000 rx
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:531    .bss.rx:00000000 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:536    .bss.tx:00000000 tx
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:537    .bss.tx:00000000 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:542    .bss.tx_buff:00000000 tx_buff
+C:\Users\ADMINI~1\AppData\Local\Temp\cc6riKUU.s:543    .bss.tx_buff:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_SPI_Receive_DMA
+hspi1
+HAL_SPI_Transmit_DMA
+HAL_SPI_TransmitReceive_DMA
+HAL_GPIO_WritePin

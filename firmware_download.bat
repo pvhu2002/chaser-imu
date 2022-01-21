@@ -1,0 +1,1 @@
+Jlink -autoconnect 1 -device STM32F030F4 -if swd -speed 1000 -commandfile download_config.jlink >./log/jlink.log

@@ -1,0 +1,1101 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"ICM20602.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.ICM20_SetGytoFullScale,"ax",%progbits
+  18              		.align	1
+  19              		.global	ICM20_SetGytoFullScale
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	ICM20_SetGytoFullScale:
+  25              	.LVL0:
+  26              	.LFB44:
+  27              		.file 1 "Modules/Sensors/ICM20602.c"
+   1:Modules/Sensors/ICM20602.c **** #include "ICM20602.h"
+   2:Modules/Sensors/ICM20602.c **** 
+   3:Modules/Sensors/ICM20602.c **** uint8_t ICM20_Init(Sens_ICM20 *handle) {
+   4:Modules/Sensors/ICM20602.c **** 	Debug_Printf("ICM20602 initial started.\r\n");
+   5:Modules/Sensors/ICM20602.c **** 	Sys_Delay(10);
+   6:Modules/Sensors/ICM20602.c **** 
+   7:Modules/Sensors/ICM20602.c **** 	if(Spi_WriteDeviceReg(SPI_ICM, ICM20_PWR_MGMT_1, 0X80)) {
+   8:Modules/Sensors/ICM20602.c **** 		return 1;
+   9:Modules/Sensors/ICM20602.c **** 	}
+  10:Modules/Sensors/ICM20602.c **** 	
+  11:Modules/Sensors/ICM20602.c **** 	Sys_Delay(50);
+  12:Modules/Sensors/ICM20602.c **** 	Spi_WriteDeviceReg(SPI_ICM, ICM20_PWR_MGMT_1, 0x01);
+  13:Modules/Sensors/ICM20602.c **** 	Sys_Delay(50);
+  14:Modules/Sensors/ICM20602.c **** 	
+  15:Modules/Sensors/ICM20602.c **** 	uint8_t id,status;
+  16:Modules/Sensors/ICM20602.c **** 	//status = ICM20_ReadReg(handle, ICM20_WHO_AM_I, &id); 
+  17:Modules/Sensors/ICM20602.c **** 	status = Spi_ReadDeviceReg(SPI_ICM, ICM20_WHO_AM_I, &id);
+  18:Modules/Sensors/ICM20602.c **** 	if(id == 0xAF) {
+  19:Modules/Sensors/ICM20602.c **** 		Debug_Printf("ICM20602 ID=%x\r\n", id);
+  20:Modules/Sensors/ICM20602.c **** 	}
+  21:Modules/Sensors/ICM20602.c **** 	else {
+  22:Modules/Sensors/ICM20602.c **** 		return 1;
+  23:Modules/Sensors/ICM20602.c **** 	}
+  24:Modules/Sensors/ICM20602.c **** 	
+  25:Modules/Sensors/ICM20602.c **** 	Spi_WriteDeviceReg(SPI_ICM, ICM20_SMPLRT_DIV, 0); 
+  26:Modules/Sensors/ICM20602.c **** 	Spi_WriteDeviceReg(SPI_ICM, ICM20_CONFIG, DLPF_BW_20); 
+  27:Modules/Sensors/ICM20602.c **** 	Spi_WriteDeviceReg(SPI_ICM, ICM20_ACCEL_CONFIG2, ACCEL_AVER_4 | ACCEL_DLPF_BW_21);
+  28:Modules/Sensors/ICM20602.c **** 	
+  29:Modules/Sensors/ICM20602.c **** 	ICM20_SetAccelFullScale(handle, ICM20_ACCEL_FS_8G);
+  30:Modules/Sensors/ICM20602.c **** 	status = ICM20_SetGytoFullScale(handle, ICM20_GYRO_FS_2000);
+  31:Modules/Sensors/ICM20602.c **** 	
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 2
+
+
+  32:Modules/Sensors/ICM20602.c **** 	Sys_Delay(100);
+  33:Modules/Sensors/ICM20602.c **** 	if(status == 0) {
+  34:Modules/Sensors/ICM20602.c **** 		//Debug_Printf("ICM20602 initial succeeded.\r\n\r\n");
+  35:Modules/Sensors/ICM20602.c **** 	}
+  36:Modules/Sensors/ICM20602.c **** 	else {
+  37:Modules/Sensors/ICM20602.c **** 		return 1;
+  38:Modules/Sensors/ICM20602.c **** 	}
+  39:Modules/Sensors/ICM20602.c **** 	
+  40:Modules/Sensors/ICM20602.c **** 	return 0;
+  41:Modules/Sensors/ICM20602.c **** }
+  42:Modules/Sensors/ICM20602.c **** 
+  43:Modules/Sensors/ICM20602.c **** uint8_t ICM20_SetGytoFullScale(Sens_ICM20 *handle, uint8_t fs) {
+  28              		.loc 1 43 64 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  44:Modules/Sensors/ICM20602.c **** 	switch(fs) {
+  32              		.loc 1 44 2 view .LVU1
+  43:Modules/Sensors/ICM20602.c **** 	switch(fs) {
+  33              		.loc 1 43 64 is_stmt 0 view .LVU2
+  34 0000 0A00     		movs	r2, r1
+  35 0002 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40              		.loc 1 44 2 view .LVU3
+  41 0004 0829     		cmp	r1, #8
+  42 0006 0AD0     		beq	.L2
+  43 0008 1029     		cmp	r1, #16
+  44 000a 0AD0     		beq	.L3
+  45 000c 0029     		cmp	r1, #0
+  46 000e 0AD1     		bne	.L4
+  45:Modules/Sensors/ICM20602.c **** 		case ICM20_GYRO_FS_250:
+  46:Modules/Sensors/ICM20602.c **** 				handle->gyro_scale = 1.0f/131.068f;
+  47              		.loc 1 46 5 is_stmt 1 view .LVU4
+  48              		.loc 1 46 24 is_stmt 0 view .LVU5
+  49 0010 074B     		ldr	r3, .L7
+  50              	.L6:
+  47:Modules/Sensors/ICM20602.c **** 		break;
+  48:Modules/Sensors/ICM20602.c **** 		case ICM20_GYRO_FS_500:
+  49:Modules/Sensors/ICM20602.c **** 				handle->gyro_scale = 1.0f/65.534f;
+  51              		.loc 1 49 24 view .LVU6
+  52 0012 4360     		str	r3, [r0, #4]
+  50:Modules/Sensors/ICM20602.c **** 		break;
+  53              		.loc 1 50 3 is_stmt 1 view .LVU7
+  54              	.L5:
+  55              	.LVL1:
+  51:Modules/Sensors/ICM20602.c **** 		case ICM20_GYRO_FS_1000:
+  52:Modules/Sensors/ICM20602.c **** 				handle->gyro_scale = 1.0f/32.767f;
+  53:Modules/Sensors/ICM20602.c **** 		break;
+  54:Modules/Sensors/ICM20602.c **** 		case ICM20_GYRO_FS_2000:
+  55:Modules/Sensors/ICM20602.c **** 				handle->gyro_scale = 1.0f/16.4f;
+  56:Modules/Sensors/ICM20602.c **** 		break;
+  57:Modules/Sensors/ICM20602.c **** 		default:
+  58:Modules/Sensors/ICM20602.c **** 			fs = ICM20_GYRO_FS_2000;
+  59:Modules/Sensors/ICM20602.c **** 			handle->gyro_scale = 1.0f/16.4f;
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 3
+
+
+  60:Modules/Sensors/ICM20602.c **** 		break;
+  61:Modules/Sensors/ICM20602.c **** 	}
+  62:Modules/Sensors/ICM20602.c **** 	
+  63:Modules/Sensors/ICM20602.c **** 	return Spi_WriteDeviceReg(SPI_ICM, ICM20_GYRO_CONFIG, fs);
+  56              		.loc 1 63 2 view .LVU8
+  57              		.loc 1 63 9 is_stmt 0 view .LVU9
+  58 0014 1B21     		movs	r1, #27
+  64:Modules/Sensors/ICM20602.c **** }
+  59              		.loc 1 64 1 view .LVU10
+  60              		@ sp needed
+  63:Modules/Sensors/ICM20602.c **** }
+  61              		.loc 1 63 9 view .LVU11
+  62 0016 0120     		movs	r0, #1
+  63              	.LVL2:
+  63:Modules/Sensors/ICM20602.c **** }
+  64              		.loc 1 63 9 view .LVU12
+  65 0018 FFF7FEFF 		bl	Spi_WriteDeviceReg
+  66              	.LVL3:
+  67              		.loc 1 64 1 view .LVU13
+  68 001c 10BD     		pop	{r4, pc}
+  69              	.LVL4:
+  70              	.L2:
+  49:Modules/Sensors/ICM20602.c **** 		break;
+  71              		.loc 1 49 5 is_stmt 1 view .LVU14
+  49:Modules/Sensors/ICM20602.c **** 		break;
+  72              		.loc 1 49 24 is_stmt 0 view .LVU15
+  73 001e 054B     		ldr	r3, .L7+4
+  74 0020 F7E7     		b	.L6
+  75              	.L3:
+  52:Modules/Sensors/ICM20602.c **** 		break;
+  76              		.loc 1 52 5 is_stmt 1 view .LVU16
+  52:Modules/Sensors/ICM20602.c **** 		break;
+  77              		.loc 1 52 24 is_stmt 0 view .LVU17
+  78 0022 054B     		ldr	r3, .L7+8
+  79 0024 F5E7     		b	.L6
+  80              	.L4:
+  55:Modules/Sensors/ICM20602.c **** 		break;
+  81              		.loc 1 55 5 is_stmt 1 view .LVU18
+  55:Modules/Sensors/ICM20602.c **** 		break;
+  82              		.loc 1 55 24 is_stmt 0 view .LVU19
+  83 0026 054B     		ldr	r3, .L7+12
+  56:Modules/Sensors/ICM20602.c **** 		default:
+  84              		.loc 1 56 3 view .LVU20
+  85 0028 1822     		movs	r2, #24
+  55:Modules/Sensors/ICM20602.c **** 		break;
+  86              		.loc 1 55 24 view .LVU21
+  87 002a 4360     		str	r3, [r0, #4]
+  56:Modules/Sensors/ICM20602.c **** 		default:
+  88              		.loc 1 56 3 is_stmt 1 view .LVU22
+  89 002c F2E7     		b	.L5
+  90              	.L8:
+  91 002e C046     		.align	2
+  92              	.L7:
+  93 0030 F501FA3B 		.word	1006240245
+  94 0034 F5017A3C 		.word	1014628853
+  95 0038 F501FA3C 		.word	1023017461
+  96 003c 90C1793D 		.word	1031389584
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 4
+
+
+  97              		.cfi_endproc
+  98              	.LFE44:
+ 100              		.section	.text.ICM20_SetAccelFullScale,"ax",%progbits
+ 101              		.align	1
+ 102              		.global	ICM20_SetAccelFullScale
+ 103              		.syntax unified
+ 104              		.code	16
+ 105              		.thumb_func
+ 107              	ICM20_SetAccelFullScale:
+ 108              	.LVL5:
+ 109              	.LFB45:
+  65:Modules/Sensors/ICM20602.c **** 
+  66:Modules/Sensors/ICM20602.c **** uint8_t ICM20_SetAccelFullScale(Sens_ICM20 *handle, uint8_t fs) {
+ 110              		.loc 1 66 65 view -0
+ 111              		.cfi_startproc
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+  67:Modules/Sensors/ICM20602.c **** 	switch(fs) {
+ 114              		.loc 1 67 2 view .LVU24
+  66:Modules/Sensors/ICM20602.c **** 	switch(fs) {
+ 115              		.loc 1 66 65 is_stmt 0 view .LVU25
+ 116 0000 0A00     		movs	r2, r1
+ 117 0002 10B5     		push	{r4, lr}
+ 118              	.LCFI1:
+ 119              		.cfi_def_cfa_offset 8
+ 120              		.cfi_offset 4, -8
+ 121              		.cfi_offset 14, -4
+ 122              		.loc 1 67 2 view .LVU26
+ 123 0004 0829     		cmp	r1, #8
+ 124 0006 06D0     		beq	.L10
+ 125 0008 1829     		cmp	r1, #24
+ 126 000a 10D0     		beq	.L11
+ 127 000c 0029     		cmp	r1, #0
+ 128 000e 05D1     		bne	.L12
+  68:Modules/Sensors/ICM20602.c **** 		case ICM20_ACCEL_FS_2G:
+  69:Modules/Sensors/ICM20602.c **** 				handle->gyro_scale = 1.0f/16348.0f;
+ 129              		.loc 1 69 5 is_stmt 1 view .LVU27
+ 130              		.loc 1 69 24 is_stmt 0 view .LVU28
+ 131 0010 084B     		ldr	r3, .L16
+ 132              	.L14:
+  70:Modules/Sensors/ICM20602.c **** 		break;
+  71:Modules/Sensors/ICM20602.c **** 		case ICM20_ACCEL_FS_4G:
+  72:Modules/Sensors/ICM20602.c **** 				handle->gyro_scale = 1.0f/8192.0f;
+  73:Modules/Sensors/ICM20602.c **** 		break;
+  74:Modules/Sensors/ICM20602.c **** 		case ICM20_ACCEL_FS_8G:
+  75:Modules/Sensors/ICM20602.c **** 				handle->gyro_scale = 1.0f/4096.0f;
+  76:Modules/Sensors/ICM20602.c **** 		break;
+  77:Modules/Sensors/ICM20602.c **** 		case ICM20_ACCEL_FS_16G:
+  78:Modules/Sensors/ICM20602.c **** 				handle->gyro_scale = 1.0f/2048.0f;
+ 133              		.loc 1 78 24 view .LVU29
+ 134 0012 4360     		str	r3, [r0, #4]
+  79:Modules/Sensors/ICM20602.c **** 		break;
+ 135              		.loc 1 79 3 is_stmt 1 view .LVU30
+ 136 0014 06E0     		b	.L13
+ 137              	.L10:
+  72:Modules/Sensors/ICM20602.c **** 		break;
+ 138              		.loc 1 72 5 view .LVU31
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 5
+
+
+  72:Modules/Sensors/ICM20602.c **** 		break;
+ 139              		.loc 1 72 24 is_stmt 0 view .LVU32
+ 140 0016 E423     		movs	r3, #228
+ 141              	.L15:
+  78:Modules/Sensors/ICM20602.c **** 		break;
+ 142              		.loc 1 78 24 view .LVU33
+ 143 0018 9B05     		lsls	r3, r3, #22
+ 144 001a FAE7     		b	.L14
+ 145              	.L12:
+  75:Modules/Sensors/ICM20602.c **** 		break;
+ 146              		.loc 1 75 5 is_stmt 1 view .LVU34
+  75:Modules/Sensors/ICM20602.c **** 		break;
+ 147              		.loc 1 75 24 is_stmt 0 view .LVU35
+ 148 001c E623     		movs	r3, #230
+  76:Modules/Sensors/ICM20602.c **** 		case ICM20_ACCEL_FS_16G:
+ 149              		.loc 1 76 3 view .LVU36
+ 150 001e 1022     		movs	r2, #16
+  75:Modules/Sensors/ICM20602.c **** 		break;
+ 151              		.loc 1 75 24 view .LVU37
+ 152 0020 9B05     		lsls	r3, r3, #22
+ 153 0022 4360     		str	r3, [r0, #4]
+  76:Modules/Sensors/ICM20602.c **** 		case ICM20_ACCEL_FS_16G:
+ 154              		.loc 1 76 3 is_stmt 1 view .LVU38
+ 155              	.L13:
+ 156              	.LVL6:
+  80:Modules/Sensors/ICM20602.c **** 		default:
+  81:Modules/Sensors/ICM20602.c **** 			fs = ICM20_ACCEL_FS_8G;
+  82:Modules/Sensors/ICM20602.c **** 			handle->gyro_scale = 1.0f/4096.0f;
+  83:Modules/Sensors/ICM20602.c **** 		break;
+  84:Modules/Sensors/ICM20602.c **** 	}
+  85:Modules/Sensors/ICM20602.c **** 	
+  86:Modules/Sensors/ICM20602.c **** 	return Spi_WriteDeviceReg(SPI_ICM, ICM20_ACCEL_CONFIG, fs);
+ 157              		.loc 1 86 2 view .LVU39
+ 158              		.loc 1 86 9 is_stmt 0 view .LVU40
+ 159 0024 1C21     		movs	r1, #28
+  87:Modules/Sensors/ICM20602.c **** }
+ 160              		.loc 1 87 1 view .LVU41
+ 161              		@ sp needed
+  86:Modules/Sensors/ICM20602.c **** }
+ 162              		.loc 1 86 9 view .LVU42
+ 163 0026 0120     		movs	r0, #1
+ 164              	.LVL7:
+  86:Modules/Sensors/ICM20602.c **** }
+ 165              		.loc 1 86 9 view .LVU43
+ 166 0028 FFF7FEFF 		bl	Spi_WriteDeviceReg
+ 167              	.LVL8:
+ 168              		.loc 1 87 1 view .LVU44
+ 169 002c 10BD     		pop	{r4, pc}
+ 170              	.LVL9:
+ 171              	.L11:
+  78:Modules/Sensors/ICM20602.c **** 		break;
+ 172              		.loc 1 78 5 is_stmt 1 view .LVU45
+  78:Modules/Sensors/ICM20602.c **** 		break;
+ 173              		.loc 1 78 24 is_stmt 0 view .LVU46
+ 174 002e E823     		movs	r3, #232
+ 175 0030 F2E7     		b	.L15
+ 176              	.L17:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 6
+
+
+ 177 0032 C046     		.align	2
+ 178              	.L16:
+ 179 0034 29488038 		.word	947931177
+ 180              		.cfi_endproc
+ 181              	.LFE45:
+ 183              		.section	.rodata.ICM20_Init.str1.1,"aMS",%progbits,1
+ 184              	.LC0:
+ 185 0000 49434D32 		.ascii	"ICM20602 initial started.\015\012\000"
+ 185      30363032 
+ 185      20696E69 
+ 185      7469616C 
+ 185      20737461 
+ 186              	.LC2:
+ 187 001c 49434D32 		.ascii	"ICM20602 ID=%x\015\012\000"
+ 187      30363032 
+ 187      2049443D 
+ 187      25780D0A 
+ 187      00
+ 188              		.section	.text.ICM20_Init,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	ICM20_Init
+ 191              		.syntax unified
+ 192              		.code	16
+ 193              		.thumb_func
+ 195              	ICM20_Init:
+ 196              	.LVL10:
+ 197              	.LFB43:
+   3:Modules/Sensors/ICM20602.c **** 	Debug_Printf("ICM20602 initial started.\r\n");
+ 198              		.loc 1 3 40 is_stmt 1 view -0
+ 199              		.cfi_startproc
+ 200              		@ args = 0, pretend = 0, frame = 8
+ 201              		@ frame_needed = 0, uses_anonymous_args = 0
+   4:Modules/Sensors/ICM20602.c **** 	Sys_Delay(10);
+ 202              		.loc 1 4 2 view .LVU48
+   3:Modules/Sensors/ICM20602.c **** 	Debug_Printf("ICM20602 initial started.\r\n");
+ 203              		.loc 1 3 40 is_stmt 0 view .LVU49
+ 204 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 205              	.LCFI2:
+ 206              		.cfi_def_cfa_offset 24
+ 207              		.cfi_offset 0, -24
+ 208              		.cfi_offset 1, -20
+ 209              		.cfi_offset 4, -16
+ 210              		.cfi_offset 5, -12
+ 211              		.cfi_offset 6, -8
+ 212              		.cfi_offset 14, -4
+   3:Modules/Sensors/ICM20602.c **** 	Debug_Printf("ICM20602 initial started.\r\n");
+ 213              		.loc 1 3 40 view .LVU50
+ 214 0002 0400     		movs	r4, r0
+   4:Modules/Sensors/ICM20602.c **** 	Sys_Delay(10);
+ 215              		.loc 1 4 2 view .LVU51
+ 216 0004 2248     		ldr	r0, .L22
+ 217              	.LVL11:
+   4:Modules/Sensors/ICM20602.c **** 	Sys_Delay(10);
+ 218              		.loc 1 4 2 view .LVU52
+ 219 0006 FFF7FEFF 		bl	Debug_Printf
+ 220              	.LVL12:
+   5:Modules/Sensors/ICM20602.c **** 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 7
+
+
+ 221              		.loc 1 5 2 is_stmt 1 view .LVU53
+ 222 000a 0A20     		movs	r0, #10
+ 223 000c FFF7FEFF 		bl	Sys_Delay
+ 224              	.LVL13:
+   7:Modules/Sensors/ICM20602.c **** 		return 1;
+ 225              		.loc 1 7 2 view .LVU54
+   7:Modules/Sensors/ICM20602.c **** 		return 1;
+ 226              		.loc 1 7 5 is_stmt 0 view .LVU55
+ 227 0010 8022     		movs	r2, #128
+ 228 0012 6B21     		movs	r1, #107
+ 229 0014 0120     		movs	r0, #1
+ 230 0016 FFF7FEFF 		bl	Spi_WriteDeviceReg
+ 231              	.LVL14:
+ 232 001a 051E     		subs	r5, r0, #0
+   7:Modules/Sensors/ICM20602.c **** 		return 1;
+ 233              		.loc 1 7 4 view .LVU56
+ 234 001c 01D0     		beq	.L19
+ 235              	.L21:
+   8:Modules/Sensors/ICM20602.c **** 	}
+ 236              		.loc 1 8 10 view .LVU57
+ 237 001e 0120     		movs	r0, #1
+ 238              	.LVL15:
+ 239              	.L20:
+  41:Modules/Sensors/ICM20602.c **** 
+ 240              		.loc 1 41 1 view .LVU58
+ 241              		@ sp needed
+ 242 0020 76BD     		pop	{r1, r2, r4, r5, r6, pc}
+ 243              	.LVL16:
+ 244              	.L19:
+  11:Modules/Sensors/ICM20602.c **** 	Spi_WriteDeviceReg(SPI_ICM, ICM20_PWR_MGMT_1, 0x01);
+ 245              		.loc 1 11 2 is_stmt 1 view .LVU59
+ 246 0022 3220     		movs	r0, #50
+ 247 0024 FFF7FEFF 		bl	Sys_Delay
+ 248              	.LVL17:
+  12:Modules/Sensors/ICM20602.c **** 	Sys_Delay(50);
+ 249              		.loc 1 12 2 view .LVU60
+ 250 0028 0122     		movs	r2, #1
+ 251 002a 6B21     		movs	r1, #107
+ 252 002c 1000     		movs	r0, r2
+ 253 002e FFF7FEFF 		bl	Spi_WriteDeviceReg
+ 254              	.LVL18:
+  13:Modules/Sensors/ICM20602.c **** 	
+ 255              		.loc 1 13 2 view .LVU61
+ 256 0032 3220     		movs	r0, #50
+ 257 0034 FFF7FEFF 		bl	Sys_Delay
+ 258              	.LVL19:
+  15:Modules/Sensors/ICM20602.c **** 	//status = ICM20_ReadReg(handle, ICM20_WHO_AM_I, &id); 
+ 259              		.loc 1 15 2 view .LVU62
+  17:Modules/Sensors/ICM20602.c **** 	if(id == 0xAF) {
+ 260              		.loc 1 17 2 view .LVU63
+  17:Modules/Sensors/ICM20602.c **** 	if(id == 0xAF) {
+ 261              		.loc 1 17 11 is_stmt 0 view .LVU64
+ 262 0038 6B46     		mov	r3, sp
+ 263 003a DE1D     		adds	r6, r3, #7
+ 264 003c 7521     		movs	r1, #117
+ 265 003e 3200     		movs	r2, r6
+ 266 0040 0120     		movs	r0, #1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 8
+
+
+ 267 0042 FFF7FEFF 		bl	Spi_ReadDeviceReg
+ 268              	.LVL20:
+  18:Modules/Sensors/ICM20602.c **** 		Debug_Printf("ICM20602 ID=%x\r\n", id);
+ 269              		.loc 1 18 2 is_stmt 1 view .LVU65
+  18:Modules/Sensors/ICM20602.c **** 		Debug_Printf("ICM20602 ID=%x\r\n", id);
+ 270              		.loc 1 18 4 is_stmt 0 view .LVU66
+ 271 0046 3178     		ldrb	r1, [r6]
+ 272 0048 AF29     		cmp	r1, #175
+ 273 004a E8D1     		bne	.L21
+  19:Modules/Sensors/ICM20602.c **** 	}
+ 274              		.loc 1 19 3 is_stmt 1 view .LVU67
+ 275 004c 1148     		ldr	r0, .L22+4
+ 276 004e FFF7FEFF 		bl	Debug_Printf
+ 277              	.LVL21:
+  25:Modules/Sensors/ICM20602.c **** 	Spi_WriteDeviceReg(SPI_ICM, ICM20_CONFIG, DLPF_BW_20); 
+ 278              		.loc 1 25 2 view .LVU68
+ 279 0052 2A00     		movs	r2, r5
+ 280 0054 1921     		movs	r1, #25
+ 281 0056 0120     		movs	r0, #1
+ 282 0058 FFF7FEFF 		bl	Spi_WriteDeviceReg
+ 283              	.LVL22:
+  26:Modules/Sensors/ICM20602.c **** 	Spi_WriteDeviceReg(SPI_ICM, ICM20_ACCEL_CONFIG2, ACCEL_AVER_4 | ACCEL_DLPF_BW_21);
+ 284              		.loc 1 26 2 view .LVU69
+ 285 005c 0422     		movs	r2, #4
+ 286 005e 1A21     		movs	r1, #26
+ 287 0060 0120     		movs	r0, #1
+ 288 0062 FFF7FEFF 		bl	Spi_WriteDeviceReg
+ 289              	.LVL23:
+  27:Modules/Sensors/ICM20602.c **** 	
+ 290              		.loc 1 27 2 view .LVU70
+ 291 0066 0422     		movs	r2, #4
+ 292 0068 1D21     		movs	r1, #29
+ 293 006a 0120     		movs	r0, #1
+ 294 006c FFF7FEFF 		bl	Spi_WriteDeviceReg
+ 295              	.LVL24:
+  29:Modules/Sensors/ICM20602.c **** 	status = ICM20_SetGytoFullScale(handle, ICM20_GYRO_FS_2000);
+ 296              		.loc 1 29 2 view .LVU71
+ 297 0070 1021     		movs	r1, #16
+ 298 0072 2000     		movs	r0, r4
+ 299 0074 FFF7FEFF 		bl	ICM20_SetAccelFullScale
+ 300              	.LVL25:
+  30:Modules/Sensors/ICM20602.c **** 	
+ 301              		.loc 1 30 2 view .LVU72
+  30:Modules/Sensors/ICM20602.c **** 	
+ 302              		.loc 1 30 11 is_stmt 0 view .LVU73
+ 303 0078 1821     		movs	r1, #24
+ 304 007a 2000     		movs	r0, r4
+ 305 007c FFF7FEFF 		bl	ICM20_SetGytoFullScale
+ 306              	.LVL26:
+ 307 0080 0400     		movs	r4, r0
+ 308              	.LVL27:
+  32:Modules/Sensors/ICM20602.c **** 	if(status == 0) {
+ 309              		.loc 1 32 2 is_stmt 1 view .LVU74
+  33:Modules/Sensors/ICM20602.c **** 		//Debug_Printf("ICM20602 initial succeeded.\r\n\r\n");
+ 310              		.loc 1 33 4 is_stmt 0 view .LVU75
+ 311 0082 631E     		subs	r3, r4, #1
+ 312 0084 9C41     		sbcs	r4, r4, r3
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 9
+
+
+ 313              	.LVL28:
+  32:Modules/Sensors/ICM20602.c **** 	if(status == 0) {
+ 314              		.loc 1 32 2 view .LVU76
+ 315 0086 6420     		movs	r0, #100
+ 316 0088 FFF7FEFF 		bl	Sys_Delay
+ 317              	.LVL29:
+  33:Modules/Sensors/ICM20602.c **** 		//Debug_Printf("ICM20602 initial succeeded.\r\n\r\n");
+ 318              		.loc 1 33 2 is_stmt 1 view .LVU77
+   8:Modules/Sensors/ICM20602.c **** 	}
+ 319              		.loc 1 8 10 is_stmt 0 view .LVU78
+ 320 008c E0B2     		uxtb	r0, r4
+ 321 008e C7E7     		b	.L20
+ 322              	.L23:
+ 323              		.align	2
+ 324              	.L22:
+ 325 0090 00000000 		.word	.LC0
+ 326 0094 1C000000 		.word	.LC2
+ 327              		.cfi_endproc
+ 328              	.LFE43:
+ 330              		.section	.text.ICM20_GetAccelADC,"ax",%progbits
+ 331              		.align	1
+ 332              		.global	ICM20_GetAccelADC
+ 333              		.syntax unified
+ 334              		.code	16
+ 335              		.thumb_func
+ 337              	ICM20_GetAccelADC:
+ 338              	.LVL30:
+ 339              	.LFB46:
+  88:Modules/Sensors/ICM20602.c **** 
+  89:Modules/Sensors/ICM20602.c **** uint8_t ICM20_GetAccelADC(Sens_ICM20 *handle) {
+ 340              		.loc 1 89 47 is_stmt 1 view -0
+ 341              		.cfi_startproc
+ 342              		@ args = 0, pretend = 0, frame = 8
+ 343              		@ frame_needed = 0, uses_anonymous_args = 0
+  90:Modules/Sensors/ICM20602.c **** 	uint8_t buf[6];
+ 344              		.loc 1 90 2 view .LVU80
+  91:Modules/Sensors/ICM20602.c **** 	
+  92:Modules/Sensors/ICM20602.c **** 	if(Spi_ReadDeviceBuffer(SPI_ICM, ICM20_ACCEL_XOUT_H, buf, 6)) {
+ 345              		.loc 1 92 2 view .LVU81
+  89:Modules/Sensors/ICM20602.c **** 	uint8_t buf[6];
+ 346              		.loc 1 89 47 is_stmt 0 view .LVU82
+ 347 0000 13B5     		push	{r0, r1, r4, lr}
+ 348              	.LCFI3:
+ 349              		.cfi_def_cfa_offset 16
+ 350              		.cfi_offset 0, -16
+ 351              		.cfi_offset 1, -12
+ 352              		.cfi_offset 4, -8
+ 353              		.cfi_offset 14, -4
+ 354              		.loc 1 92 5 view .LVU83
+ 355 0002 0623     		movs	r3, #6
+  89:Modules/Sensors/ICM20602.c **** 	uint8_t buf[6];
+ 356              		.loc 1 89 47 view .LVU84
+ 357 0004 0400     		movs	r4, r0
+ 358              		.loc 1 92 5 view .LVU85
+ 359 0006 6A46     		mov	r2, sp
+ 360 0008 3B21     		movs	r1, #59
+ 361 000a 0120     		movs	r0, #1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 10
+
+
+ 362              	.LVL31:
+ 363              		.loc 1 92 5 view .LVU86
+ 364 000c FFF7FEFF 		bl	Spi_ReadDeviceBuffer
+ 365              	.LVL32:
+ 366              		.loc 1 92 4 view .LVU87
+ 367 0010 0028     		cmp	r0, #0
+ 368 0012 12D1     		bne	.L26
+  93:Modules/Sensors/ICM20602.c **** 		return 1;
+  94:Modules/Sensors/ICM20602.c **** 	}
+  95:Modules/Sensors/ICM20602.c **** 	
+  96:Modules/Sensors/ICM20602.c **** 	handle->accel_adc[0] = ((int16_t)buf[0]<<8) + buf[1];
+ 369              		.loc 1 96 2 is_stmt 1 view .LVU88
+ 370              		.loc 1 96 38 is_stmt 0 view .LVU89
+ 371 0014 6B46     		mov	r3, sp
+ 372 0016 1A78     		ldrb	r2, [r3]
+ 373              		.loc 1 96 51 view .LVU90
+ 374 0018 5B78     		ldrb	r3, [r3, #1]
+ 375              		.loc 1 96 41 view .LVU91
+ 376 001a 1202     		lsls	r2, r2, #8
+ 377              		.loc 1 96 46 view .LVU92
+ 378 001c 9B18     		adds	r3, r3, r2
+ 379              		.loc 1 96 23 view .LVU93
+ 380 001e 2381     		strh	r3, [r4, #8]
+  97:Modules/Sensors/ICM20602.c **** 	handle->accel_adc[1] = ((int16_t)buf[2]<<8) + buf[3];
+ 381              		.loc 1 97 2 is_stmt 1 view .LVU94
+ 382              		.loc 1 97 38 is_stmt 0 view .LVU95
+ 383 0020 6B46     		mov	r3, sp
+ 384 0022 9A78     		ldrb	r2, [r3, #2]
+ 385              		.loc 1 97 51 view .LVU96
+ 386 0024 DB78     		ldrb	r3, [r3, #3]
+ 387              		.loc 1 97 41 view .LVU97
+ 388 0026 1202     		lsls	r2, r2, #8
+ 389              		.loc 1 97 46 view .LVU98
+ 390 0028 9B18     		adds	r3, r3, r2
+ 391              		.loc 1 97 23 view .LVU99
+ 392 002a 6381     		strh	r3, [r4, #10]
+  98:Modules/Sensors/ICM20602.c **** 	handle->accel_adc[2] = ((int16_t)buf[4]<<8) + buf[5];
+ 393              		.loc 1 98 2 is_stmt 1 view .LVU100
+ 394              		.loc 1 98 38 is_stmt 0 view .LVU101
+ 395 002c 6B46     		mov	r3, sp
+ 396 002e 1A79     		ldrb	r2, [r3, #4]
+ 397              		.loc 1 98 51 view .LVU102
+ 398 0030 5B79     		ldrb	r3, [r3, #5]
+ 399              		.loc 1 98 41 view .LVU103
+ 400 0032 1202     		lsls	r2, r2, #8
+ 401              		.loc 1 98 46 view .LVU104
+ 402 0034 9B18     		adds	r3, r3, r2
+ 403              		.loc 1 98 23 view .LVU105
+ 404 0036 A381     		strh	r3, [r4, #12]
+  99:Modules/Sensors/ICM20602.c **** 	
+ 100:Modules/Sensors/ICM20602.c **** 	return 0;
+ 405              		.loc 1 100 2 is_stmt 1 view .LVU106
+ 406              	.L25:
+ 101:Modules/Sensors/ICM20602.c **** }
+ 407              		.loc 1 101 1 is_stmt 0 view .LVU107
+ 408              		@ sp needed
+ 409              	.LVL33:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 11
+
+
+ 410              		.loc 1 101 1 view .LVU108
+ 411 0038 16BD     		pop	{r1, r2, r4, pc}
+ 412              	.LVL34:
+ 413              	.L26:
+  93:Modules/Sensors/ICM20602.c **** 	}
+ 414              		.loc 1 93 10 view .LVU109
+ 415 003a 0120     		movs	r0, #1
+ 416 003c FCE7     		b	.L25
+ 417              		.cfi_endproc
+ 418              	.LFE46:
+ 420              		.section	.text.ICM20_GetGyroADC,"ax",%progbits
+ 421              		.align	1
+ 422              		.global	ICM20_GetGyroADC
+ 423              		.syntax unified
+ 424              		.code	16
+ 425              		.thumb_func
+ 427              	ICM20_GetGyroADC:
+ 428              	.LVL35:
+ 429              	.LFB47:
+ 102:Modules/Sensors/ICM20602.c **** 
+ 103:Modules/Sensors/ICM20602.c **** uint8_t ICM20_GetGyroADC(Sens_ICM20 *handle) {
+ 430              		.loc 1 103 46 is_stmt 1 view -0
+ 431              		.cfi_startproc
+ 432              		@ args = 0, pretend = 0, frame = 8
+ 433              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104:Modules/Sensors/ICM20602.c **** 	uint8_t buf[6];
+ 434              		.loc 1 104 2 view .LVU111
+ 105:Modules/Sensors/ICM20602.c **** 	
+ 106:Modules/Sensors/ICM20602.c **** 	if(Spi_ReadDeviceBuffer(SPI_ICM, ICM20_GYRO_XOUT_H, buf, 6)) {
+ 435              		.loc 1 106 2 view .LVU112
+ 103:Modules/Sensors/ICM20602.c **** 	uint8_t buf[6];
+ 436              		.loc 1 103 46 is_stmt 0 view .LVU113
+ 437 0000 13B5     		push	{r0, r1, r4, lr}
+ 438              	.LCFI4:
+ 439              		.cfi_def_cfa_offset 16
+ 440              		.cfi_offset 0, -16
+ 441              		.cfi_offset 1, -12
+ 442              		.cfi_offset 4, -8
+ 443              		.cfi_offset 14, -4
+ 444              		.loc 1 106 5 view .LVU114
+ 445 0002 0623     		movs	r3, #6
+ 103:Modules/Sensors/ICM20602.c **** 	uint8_t buf[6];
+ 446              		.loc 1 103 46 view .LVU115
+ 447 0004 0400     		movs	r4, r0
+ 448              		.loc 1 106 5 view .LVU116
+ 449 0006 6A46     		mov	r2, sp
+ 450 0008 4321     		movs	r1, #67
+ 451 000a 0120     		movs	r0, #1
+ 452              	.LVL36:
+ 453              		.loc 1 106 5 view .LVU117
+ 454 000c FFF7FEFF 		bl	Spi_ReadDeviceBuffer
+ 455              	.LVL37:
+ 456              		.loc 1 106 4 view .LVU118
+ 457 0010 0028     		cmp	r0, #0
+ 458 0012 12D1     		bne	.L29
+ 107:Modules/Sensors/ICM20602.c **** 		return 1;
+ 108:Modules/Sensors/ICM20602.c **** 	}
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 12
+
+
+ 109:Modules/Sensors/ICM20602.c **** 	
+ 110:Modules/Sensors/ICM20602.c **** 	handle->gyro_adc[0] = ((int16_t)buf[0]<<8) + buf[1];
+ 459              		.loc 1 110 2 is_stmt 1 view .LVU119
+ 460              		.loc 1 110 37 is_stmt 0 view .LVU120
+ 461 0014 6B46     		mov	r3, sp
+ 462 0016 1A78     		ldrb	r2, [r3]
+ 463              		.loc 1 110 50 view .LVU121
+ 464 0018 5B78     		ldrb	r3, [r3, #1]
+ 465              		.loc 1 110 40 view .LVU122
+ 466 001a 1202     		lsls	r2, r2, #8
+ 467              		.loc 1 110 45 view .LVU123
+ 468 001c 9B18     		adds	r3, r3, r2
+ 469              		.loc 1 110 22 view .LVU124
+ 470 001e E381     		strh	r3, [r4, #14]
+ 111:Modules/Sensors/ICM20602.c **** 	handle->gyro_adc[1] = ((int16_t)buf[2]<<8) + buf[3];
+ 471              		.loc 1 111 2 is_stmt 1 view .LVU125
+ 472              		.loc 1 111 37 is_stmt 0 view .LVU126
+ 473 0020 6B46     		mov	r3, sp
+ 474 0022 9A78     		ldrb	r2, [r3, #2]
+ 475              		.loc 1 111 50 view .LVU127
+ 476 0024 DB78     		ldrb	r3, [r3, #3]
+ 477              		.loc 1 111 40 view .LVU128
+ 478 0026 1202     		lsls	r2, r2, #8
+ 479              		.loc 1 111 45 view .LVU129
+ 480 0028 9B18     		adds	r3, r3, r2
+ 481              		.loc 1 111 22 view .LVU130
+ 482 002a 2382     		strh	r3, [r4, #16]
+ 112:Modules/Sensors/ICM20602.c **** 	handle->gyro_adc[2] = ((int16_t)buf[4]<<8) + buf[5];
+ 483              		.loc 1 112 2 is_stmt 1 view .LVU131
+ 484              		.loc 1 112 37 is_stmt 0 view .LVU132
+ 485 002c 6B46     		mov	r3, sp
+ 486 002e 1A79     		ldrb	r2, [r3, #4]
+ 487              		.loc 1 112 50 view .LVU133
+ 488 0030 5B79     		ldrb	r3, [r3, #5]
+ 489              		.loc 1 112 40 view .LVU134
+ 490 0032 1202     		lsls	r2, r2, #8
+ 491              		.loc 1 112 45 view .LVU135
+ 492 0034 9B18     		adds	r3, r3, r2
+ 493              		.loc 1 112 22 view .LVU136
+ 494 0036 6382     		strh	r3, [r4, #18]
+ 113:Modules/Sensors/ICM20602.c **** 	
+ 114:Modules/Sensors/ICM20602.c **** 	return 0;
+ 495              		.loc 1 114 2 is_stmt 1 view .LVU137
+ 496              	.L28:
+ 115:Modules/Sensors/ICM20602.c **** }
+ 497              		.loc 1 115 1 is_stmt 0 view .LVU138
+ 498              		@ sp needed
+ 499              	.LVL38:
+ 500              		.loc 1 115 1 view .LVU139
+ 501 0038 16BD     		pop	{r1, r2, r4, pc}
+ 502              	.LVL39:
+ 503              	.L29:
+ 107:Modules/Sensors/ICM20602.c **** 	}
+ 504              		.loc 1 107 10 view .LVU140
+ 505 003a 0120     		movs	r0, #1
+ 506 003c FCE7     		b	.L28
+ 507              		.cfi_endproc
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 13
+
+
+ 508              	.LFE47:
+ 510              		.global	__aeabi_i2f
+ 511              		.global	__aeabi_fmul
+ 512              		.section	.text.ICM20_GetAccel,"ax",%progbits
+ 513              		.align	1
+ 514              		.global	ICM20_GetAccel
+ 515              		.syntax unified
+ 516              		.code	16
+ 517              		.thumb_func
+ 519              	ICM20_GetAccel:
+ 520              	.LVL40:
+ 521              	.LFB48:
+ 116:Modules/Sensors/ICM20602.c **** 
+ 117:Modules/Sensors/ICM20602.c **** uint8_t ICM20_GetAccel(Sens_ICM20 *handle) {
+ 522              		.loc 1 117 44 is_stmt 1 view -0
+ 523              		.cfi_startproc
+ 524              		@ args = 0, pretend = 0, frame = 0
+ 525              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118:Modules/Sensors/ICM20602.c **** 	if(ICM20_GetAccelADC(handle)) {
+ 526              		.loc 1 118 2 view .LVU142
+ 117:Modules/Sensors/ICM20602.c **** 	if(ICM20_GetAccelADC(handle)) {
+ 527              		.loc 1 117 44 is_stmt 0 view .LVU143
+ 528 0000 70B5     		push	{r4, r5, r6, lr}
+ 529              	.LCFI5:
+ 530              		.cfi_def_cfa_offset 16
+ 531              		.cfi_offset 4, -16
+ 532              		.cfi_offset 5, -12
+ 533              		.cfi_offset 6, -8
+ 534              		.cfi_offset 14, -4
+ 117:Modules/Sensors/ICM20602.c **** 	if(ICM20_GetAccelADC(handle)) {
+ 535              		.loc 1 117 44 view .LVU144
+ 536 0002 0400     		movs	r4, r0
+ 537              		.loc 1 118 5 view .LVU145
+ 538 0004 FFF7FEFF 		bl	ICM20_GetAccelADC
+ 539              	.LVL41:
+ 540              		.loc 1 118 5 view .LVU146
+ 541 0008 051E     		subs	r5, r0, #0
+ 542              		.loc 1 118 4 view .LVU147
+ 543 000a 1AD1     		bne	.L32
+ 119:Modules/Sensors/ICM20602.c **** 		return 1;
+ 120:Modules/Sensors/ICM20602.c **** 	}
+ 121:Modules/Sensors/ICM20602.c **** 	
+ 122:Modules/Sensors/ICM20602.c **** 	handle->accel[0] = handle->accel_scale * handle->accel_adc[0];
+ 544              		.loc 1 122 2 is_stmt 1 view .LVU148
+ 545              		.loc 1 122 27 is_stmt 0 view .LVU149
+ 546 000c 2668     		ldr	r6, [r4]
+ 547              		.loc 1 122 41 view .LVU150
+ 548 000e 0823     		movs	r3, #8
+ 549 0010 E05E     		ldrsh	r0, [r4, r3]
+ 550 0012 FFF7FEFF 		bl	__aeabi_i2f
+ 551              	.LVL42:
+ 552 0016 311C     		adds	r1, r6, #0
+ 553 0018 FFF7FEFF 		bl	__aeabi_fmul
+ 554              	.LVL43:
+ 555              		.loc 1 122 19 view .LVU151
+ 556 001c 6061     		str	r0, [r4, #20]
+ 123:Modules/Sensors/ICM20602.c **** 	handle->accel[1] = handle->accel_scale * handle->accel_adc[1];
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 14
+
+
+ 557              		.loc 1 123 2 is_stmt 1 view .LVU152
+ 558              		.loc 1 123 41 is_stmt 0 view .LVU153
+ 559 001e 0A23     		movs	r3, #10
+ 560 0020 E05E     		ldrsh	r0, [r4, r3]
+ 561 0022 FFF7FEFF 		bl	__aeabi_i2f
+ 562              	.LVL44:
+ 563 0026 311C     		adds	r1, r6, #0
+ 564 0028 FFF7FEFF 		bl	__aeabi_fmul
+ 565              	.LVL45:
+ 566              		.loc 1 123 19 view .LVU154
+ 567 002c A061     		str	r0, [r4, #24]
+ 124:Modules/Sensors/ICM20602.c **** 	handle->accel[2] = handle->accel_scale * handle->accel_adc[2];
+ 568              		.loc 1 124 2 is_stmt 1 view .LVU155
+ 569              		.loc 1 124 41 is_stmt 0 view .LVU156
+ 570 002e 0C23     		movs	r3, #12
+ 571 0030 E05E     		ldrsh	r0, [r4, r3]
+ 572 0032 FFF7FEFF 		bl	__aeabi_i2f
+ 573              	.LVL46:
+ 574 0036 311C     		adds	r1, r6, #0
+ 575 0038 FFF7FEFF 		bl	__aeabi_fmul
+ 576              	.LVL47:
+ 577              		.loc 1 124 19 view .LVU157
+ 578 003c E061     		str	r0, [r4, #28]
+ 125:Modules/Sensors/ICM20602.c **** 	
+ 126:Modules/Sensors/ICM20602.c **** 	return 0;
+ 579              		.loc 1 126 2 is_stmt 1 view .LVU158
+ 580              	.L31:
+ 127:Modules/Sensors/ICM20602.c **** }
+ 581              		.loc 1 127 1 is_stmt 0 view .LVU159
+ 582 003e 2800     		movs	r0, r5
+ 583              		@ sp needed
+ 584              	.LVL48:
+ 585              		.loc 1 127 1 view .LVU160
+ 586 0040 70BD     		pop	{r4, r5, r6, pc}
+ 587              	.LVL49:
+ 588              	.L32:
+ 119:Modules/Sensors/ICM20602.c **** 	}
+ 589              		.loc 1 119 10 view .LVU161
+ 590 0042 0125     		movs	r5, #1
+ 591 0044 FBE7     		b	.L31
+ 592              		.cfi_endproc
+ 593              	.LFE48:
+ 595              		.section	.text.ICM20_GetGyro,"ax",%progbits
+ 596              		.align	1
+ 597              		.global	ICM20_GetGyro
+ 598              		.syntax unified
+ 599              		.code	16
+ 600              		.thumb_func
+ 602              	ICM20_GetGyro:
+ 603              	.LVL50:
+ 604              	.LFB49:
+ 128:Modules/Sensors/ICM20602.c **** 
+ 129:Modules/Sensors/ICM20602.c **** uint8_t ICM20_GetGyro(Sens_ICM20 *handle) {
+ 605              		.loc 1 129 43 is_stmt 1 view -0
+ 606              		.cfi_startproc
+ 607              		@ args = 0, pretend = 0, frame = 0
+ 608              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 15
+
+
+ 130:Modules/Sensors/ICM20602.c **** 	if(ICM20_GetGyroADC(handle)) {
+ 609              		.loc 1 130 2 view .LVU163
+ 129:Modules/Sensors/ICM20602.c **** 	if(ICM20_GetGyroADC(handle)) {
+ 610              		.loc 1 129 43 is_stmt 0 view .LVU164
+ 611 0000 70B5     		push	{r4, r5, r6, lr}
+ 612              	.LCFI6:
+ 613              		.cfi_def_cfa_offset 16
+ 614              		.cfi_offset 4, -16
+ 615              		.cfi_offset 5, -12
+ 616              		.cfi_offset 6, -8
+ 617              		.cfi_offset 14, -4
+ 129:Modules/Sensors/ICM20602.c **** 	if(ICM20_GetGyroADC(handle)) {
+ 618              		.loc 1 129 43 view .LVU165
+ 619 0002 0400     		movs	r4, r0
+ 620              		.loc 1 130 5 view .LVU166
+ 621 0004 FFF7FEFF 		bl	ICM20_GetGyroADC
+ 622              	.LVL51:
+ 623              		.loc 1 130 5 view .LVU167
+ 624 0008 051E     		subs	r5, r0, #0
+ 625              		.loc 1 130 4 view .LVU168
+ 626 000a 1AD1     		bne	.L35
+ 131:Modules/Sensors/ICM20602.c **** 		return 1;
+ 132:Modules/Sensors/ICM20602.c **** 	}
+ 133:Modules/Sensors/ICM20602.c **** 	
+ 134:Modules/Sensors/ICM20602.c **** 	handle->gyro[0] = handle->gyro_scale * handle->gyro_adc[0];
+ 627              		.loc 1 134 2 is_stmt 1 view .LVU169
+ 628              		.loc 1 134 26 is_stmt 0 view .LVU170
+ 629 000c 6668     		ldr	r6, [r4, #4]
+ 630              		.loc 1 134 39 view .LVU171
+ 631 000e 0E23     		movs	r3, #14
+ 632 0010 E05E     		ldrsh	r0, [r4, r3]
+ 633 0012 FFF7FEFF 		bl	__aeabi_i2f
+ 634              	.LVL52:
+ 635 0016 311C     		adds	r1, r6, #0
+ 636 0018 FFF7FEFF 		bl	__aeabi_fmul
+ 637              	.LVL53:
+ 638              		.loc 1 134 18 view .LVU172
+ 639 001c 2062     		str	r0, [r4, #32]
+ 135:Modules/Sensors/ICM20602.c **** 	handle->gyro[1] = handle->gyro_scale * handle->gyro_adc[1];
+ 640              		.loc 1 135 2 is_stmt 1 view .LVU173
+ 641              		.loc 1 135 39 is_stmt 0 view .LVU174
+ 642 001e 1023     		movs	r3, #16
+ 643 0020 E05E     		ldrsh	r0, [r4, r3]
+ 644 0022 FFF7FEFF 		bl	__aeabi_i2f
+ 645              	.LVL54:
+ 646 0026 311C     		adds	r1, r6, #0
+ 647 0028 FFF7FEFF 		bl	__aeabi_fmul
+ 648              	.LVL55:
+ 649              		.loc 1 135 18 view .LVU175
+ 650 002c 6062     		str	r0, [r4, #36]
+ 136:Modules/Sensors/ICM20602.c **** 	handle->gyro[2] = handle->gyro_scale * handle->gyro_adc[2];
+ 651              		.loc 1 136 2 is_stmt 1 view .LVU176
+ 652              		.loc 1 136 39 is_stmt 0 view .LVU177
+ 653 002e 1223     		movs	r3, #18
+ 654 0030 E05E     		ldrsh	r0, [r4, r3]
+ 655 0032 FFF7FEFF 		bl	__aeabi_i2f
+ 656              	.LVL56:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 16
+
+
+ 657 0036 311C     		adds	r1, r6, #0
+ 658 0038 FFF7FEFF 		bl	__aeabi_fmul
+ 659              	.LVL57:
+ 660              		.loc 1 136 18 view .LVU178
+ 661 003c A062     		str	r0, [r4, #40]
+ 137:Modules/Sensors/ICM20602.c **** 	
+ 138:Modules/Sensors/ICM20602.c **** 	return 0;
+ 662              		.loc 1 138 2 is_stmt 1 view .LVU179
+ 663              	.L34:
+ 139:Modules/Sensors/ICM20602.c **** }
+ 664              		.loc 1 139 1 is_stmt 0 view .LVU180
+ 665 003e 2800     		movs	r0, r5
+ 666              		@ sp needed
+ 667              	.LVL58:
+ 668              		.loc 1 139 1 view .LVU181
+ 669 0040 70BD     		pop	{r4, r5, r6, pc}
+ 670              	.LVL59:
+ 671              	.L35:
+ 131:Modules/Sensors/ICM20602.c **** 	}
+ 672              		.loc 1 131 10 view .LVU182
+ 673 0042 0125     		movs	r5, #1
+ 674 0044 FBE7     		b	.L34
+ 675              		.cfi_endproc
+ 676              	.LFE49:
+ 678              		.section	.rodata.ICM20_GetTemperatue.str1.1,"aMS",%progbits,1
+ 679              	.LC4:
+ 680 0000 74656D70 		.ascii	"temp adc:%d\012\015\000"
+ 680      20616463 
+ 680      3A25640A 
+ 680      0D00
+ 681              		.global	__aeabi_ui2f
+ 682              		.global	__aeabi_fdiv
+ 683              		.global	__aeabi_fadd
+ 684              		.section	.text.ICM20_GetTemperatue,"ax",%progbits
+ 685              		.align	1
+ 686              		.global	ICM20_GetTemperatue
+ 687              		.syntax unified
+ 688              		.code	16
+ 689              		.thumb_func
+ 691              	ICM20_GetTemperatue:
+ 692              	.LVL60:
+ 693              	.LFB50:
+ 140:Modules/Sensors/ICM20602.c **** 
+ 141:Modules/Sensors/ICM20602.c **** uint8_t ICM20_GetTemperatue(Sens_ICM20 *handle) {
+ 694              		.loc 1 141 49 is_stmt 1 view -0
+ 695              		.cfi_startproc
+ 696              		@ args = 0, pretend = 0, frame = 8
+ 697              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142:Modules/Sensors/ICM20602.c **** 	uint16_t temp_adc;
+ 698              		.loc 1 142 2 view .LVU184
+ 143:Modules/Sensors/ICM20602.c **** 	uint8_t buf[2];
+ 699              		.loc 1 143 2 view .LVU185
+ 144:Modules/Sensors/ICM20602.c **** 	if(Spi_ReadDeviceBuffer(SPI_ICM, ICM20_TEMP_OUT_H, buf, 2)) {
+ 700              		.loc 1 144 2 view .LVU186
+ 141:Modules/Sensors/ICM20602.c **** 	uint16_t temp_adc;
+ 701              		.loc 1 141 49 is_stmt 0 view .LVU187
+ 702 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 17
+
+
+ 703              	.LCFI7:
+ 704              		.cfi_def_cfa_offset 24
+ 705              		.cfi_offset 0, -24
+ 706              		.cfi_offset 1, -20
+ 707              		.cfi_offset 4, -16
+ 708              		.cfi_offset 5, -12
+ 709              		.cfi_offset 6, -8
+ 710              		.cfi_offset 14, -4
+ 711              		.loc 1 144 5 view .LVU188
+ 712 0002 0223     		movs	r3, #2
+ 141:Modules/Sensors/ICM20602.c **** 	uint16_t temp_adc;
+ 713              		.loc 1 141 49 view .LVU189
+ 714 0004 0600     		movs	r6, r0
+ 715              		.loc 1 144 5 view .LVU190
+ 716 0006 4121     		movs	r1, #65
+ 717 0008 0120     		movs	r0, #1
+ 718              	.LVL61:
+ 719              		.loc 1 144 5 view .LVU191
+ 720 000a 01AA     		add	r2, sp, #4
+ 721 000c FFF7FEFF 		bl	Spi_ReadDeviceBuffer
+ 722              	.LVL62:
+ 723 0010 051E     		subs	r5, r0, #0
+ 724              		.loc 1 144 4 view .LVU192
+ 725 0012 16D1     		bne	.L38
+ 145:Modules/Sensors/ICM20602.c **** 		return 1;
+ 146:Modules/Sensors/ICM20602.c **** 	}
+ 147:Modules/Sensors/ICM20602.c **** 	temp_adc = (buf[0]<<8) + buf[1];
+ 726              		.loc 1 147 2 is_stmt 1 view .LVU193
+ 727              		.loc 1 147 17 is_stmt 0 view .LVU194
+ 728 0014 6B46     		mov	r3, sp
+ 729              		.loc 1 147 30 view .LVU195
+ 730 0016 6A46     		mov	r2, sp
+ 731              		.loc 1 147 17 view .LVU196
+ 732 0018 1B79     		ldrb	r3, [r3, #4]
+ 733              		.loc 1 147 30 view .LVU197
+ 734 001a 5479     		ldrb	r4, [r2, #5]
+ 735              		.loc 1 147 20 view .LVU198
+ 736 001c 1B02     		lsls	r3, r3, #8
+ 737              		.loc 1 147 11 view .LVU199
+ 738 001e E418     		adds	r4, r4, r3
+ 739 0020 A4B2     		uxth	r4, r4
+ 740              	.LVL63:
+ 148:Modules/Sensors/ICM20602.c **** 	Debug_Printf("temp adc:%d\n\r",temp_adc);
+ 741              		.loc 1 148 2 is_stmt 1 view .LVU200
+ 742 0022 2100     		movs	r1, r4
+ 743 0024 0848     		ldr	r0, .L39
+ 744 0026 FFF7FEFF 		bl	Debug_Printf
+ 745              	.LVL64:
+ 149:Modules/Sensors/ICM20602.c **** 	handle->temperature = (25.0f + (float)temp_adc/326.8f);
+ 746              		.loc 1 149 2 view .LVU201
+ 747              		.loc 1 149 33 is_stmt 0 view .LVU202
+ 748 002a 2000     		movs	r0, r4
+ 749 002c FFF7FEFF 		bl	__aeabi_ui2f
+ 750              	.LVL65:
+ 751              		.loc 1 149 48 view .LVU203
+ 752 0030 0649     		ldr	r1, .L39+4
+ 753 0032 FFF7FEFF 		bl	__aeabi_fdiv
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 18
+
+
+ 754              	.LVL66:
+ 755              		.loc 1 149 31 view .LVU204
+ 756 0036 0649     		ldr	r1, .L39+8
+ 757 0038 FFF7FEFF 		bl	__aeabi_fadd
+ 758              	.LVL67:
+ 759              		.loc 1 149 22 view .LVU205
+ 760 003c F062     		str	r0, [r6, #44]
+ 150:Modules/Sensors/ICM20602.c **** 	
+ 151:Modules/Sensors/ICM20602.c **** 	return 0;
+ 761              		.loc 1 151 2 is_stmt 1 view .LVU206
+ 762              	.LVL68:
+ 763              	.L37:
+ 152:Modules/Sensors/ICM20602.c **** }
+ 764              		.loc 1 152 1 is_stmt 0 view .LVU207
+ 765 003e 2800     		movs	r0, r5
+ 766              		@ sp needed
+ 767              	.LVL69:
+ 768              		.loc 1 152 1 view .LVU208
+ 769 0040 76BD     		pop	{r1, r2, r4, r5, r6, pc}
+ 770              	.LVL70:
+ 771              	.L38:
+ 145:Modules/Sensors/ICM20602.c **** 	}
+ 772              		.loc 1 145 10 view .LVU209
+ 773 0042 0125     		movs	r5, #1
+ 774 0044 FBE7     		b	.L37
+ 775              	.L40:
+ 776 0046 C046     		.align	2
+ 777              	.L39:
+ 778 0048 00000000 		.word	.LC4
+ 779 004c 6666A343 		.word	1134782054
+ 780 0050 0000C841 		.word	1103626240
+ 781              		.cfi_endproc
+ 782              	.LFE50:
+ 784              		.text
+ 785              	.Letext0:
+ 786              		.file 2 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 787              		.file 3 "d:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 788              		.file 4 "Modules/Sensors/ICM20602.h"
+ 789              		.file 5 "Modules/Connectivity/Spi_Driver.h"
+ 790              		.file 6 "Modules/Connectivity/Uart_Driver.h"
+ 791              		.file 7 "Modules/System/System_Tick.h"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ICM20602.c
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:18     .text.ICM20_SetGytoFullScale:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:24     .text.ICM20_SetGytoFullScale:00000000 ICM20_SetGytoFullScale
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:93     .text.ICM20_SetGytoFullScale:00000030 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:101    .text.ICM20_SetAccelFullScale:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:107    .text.ICM20_SetAccelFullScale:00000000 ICM20_SetAccelFullScale
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:179    .text.ICM20_SetAccelFullScale:00000034 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:189    .text.ICM20_Init:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:195    .text.ICM20_Init:00000000 ICM20_Init
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:325    .text.ICM20_Init:00000090 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:331    .text.ICM20_GetAccelADC:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:337    .text.ICM20_GetAccelADC:00000000 ICM20_GetAccelADC
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:421    .text.ICM20_GetGyroADC:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:427    .text.ICM20_GetGyroADC:00000000 ICM20_GetGyroADC
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:513    .text.ICM20_GetAccel:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:519    .text.ICM20_GetAccel:00000000 ICM20_GetAccel
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:596    .text.ICM20_GetGyro:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:602    .text.ICM20_GetGyro:00000000 ICM20_GetGyro
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:685    .text.ICM20_GetTemperatue:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:691    .text.ICM20_GetTemperatue:00000000 ICM20_GetTemperatue
+C:\Users\ADMINI~1\AppData\Local\Temp\ccxvASsg.s:778    .text.ICM20_GetTemperatue:00000048 $d
+
+UNDEFINED SYMBOLS
+Spi_WriteDeviceReg
+Debug_Printf
+Sys_Delay
+Spi_ReadDeviceReg
+Spi_ReadDeviceBuffer
+__aeabi_i2f
+__aeabi_fmul
+__aeabi_ui2f
+__aeabi_fdiv
+__aeabi_fadd
